@@ -1,5 +1,5 @@
 import algorithms.Genetic;
-import algorithms.Greedy;
+import algorithms.BackTrack;
 import models.Individual;
 import models.Parameter;
 
@@ -13,6 +13,11 @@ public class Main {
   static Scanner in = new Scanner(System.in);
 
   public static void main(String[] args) throws IOException {
+    // BackTrack backTrack = new BackTrack(parameters);
+
+    // System.out.println("\n\n");
+    // System.out.println("\n\n");
+    
 
     System.out.println("""
 
@@ -155,7 +160,7 @@ public class Main {
     do {
       System.out.println("\nSolver menu:\n");
       System.out.println("0 <- back");
-      System.out.println("1 -> greedy");
+      System.out.println("1 -> BackTrack");
       System.out.println("2 -> genetic");
       System.out.println("3 -> immunological");
       System.out.println("4 -> ant colony");
@@ -164,7 +169,7 @@ public class Main {
       option = in.nextInt();
 
       switch (option) {
-        case 1 -> greedyMenu();
+        case 1 -> BackTrackMenu();
         case 2 -> geneticMenu();
         case 3 -> immunologicalMenu();
         case 4 -> antColonyMenu();
@@ -172,8 +177,8 @@ public class Main {
     } while (option != 0);
   }
 
-  public static void greedyMenu() {
-    System.out.println("\nGreedy algorithm:\n");
+  public static void BackTrackMenu() {
+    System.out.println("\nBackTrack algorithm:\n");
 
     System.out.print("Inform the step (e.g. 0.25): ");
     double step = in.nextDouble();
@@ -181,8 +186,8 @@ public class Main {
     System.out.print("Inform the the individual value (e.g. 14.00): ");
     double individualValue = in.nextDouble();
 
-    Greedy greedy = new Greedy(parameters);
-    Individual result = greedy.solve(individualValue, step);
+    BackTrack backTrack = new BackTrack(parameters);
+    Individual result = backTrack.solve(individualValue, step);
 
     System.out.println("\nThe solution is:");
     System.out.println(result);

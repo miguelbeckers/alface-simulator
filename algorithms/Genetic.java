@@ -10,6 +10,7 @@ import java.util.List;
 public class Genetic {
     private List<Individual> population = new ArrayList<>();
     private Individual bestSolution;
+  
     public Genetic(int populationSize, List<Parameter> parameters){
         for(int i = 0; i < populationSize; i ++){
             population.add(new Individual(parameters));
