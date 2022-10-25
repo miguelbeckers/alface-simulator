@@ -12,13 +12,7 @@ public class Main {
   static List<Parameter> parameters = new ArrayList<>();
   static Scanner in = new Scanner(System.in);
 
-  public static void main(String[] args) throws IOException {
-    // BackTrack backTrack = new BackTrack(parameters);
-
-    // System.out.println("\n\n");
-    // System.out.println("\n\n");
-    
-
+  public static void main(String[] args) throws IOException {    
     System.out.println("""
 
                  ┌████┐ ┌██┐   ┌█████┐ ┌████┐ ┌█████┐┌█████┐
@@ -37,6 +31,9 @@ public class Main {
     parameters.add(new Parameter("K", 0.0, 100.0, 2.0));
     parameters.add(new Parameter("N", 0.0, 100.0, 2.0));
     parameters.add(new Parameter("P", 0.0, 100.0, 2.0));
+
+    BackTrack backTrack = new BackTrack(parameters);
+    backTrack.solveAsTree(0.25);
 
     int option;
     do {
