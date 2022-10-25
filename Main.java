@@ -36,7 +36,7 @@ public class Main {
     do {
       System.out.println("\nMain menu:\n");
       System.out.println("1 -> parameters");
-      System.out.println("2 -> solve");
+      System.out.println("2 -> solver");
       System.out.println("3 -> exit");
       System.out.print("\nselect: ");
 
@@ -154,7 +154,7 @@ public class Main {
     do {
       System.out.println("\nSolver menu:\n");
       System.out.println("0 <- back");
-      System.out.println("1 -> BackTracking");
+      System.out.println("1 -> backTracking");
       System.out.println("2 -> genetic");
       System.out.println("3 -> immunological");
       System.out.println("4 -> ant colony");
@@ -163,7 +163,7 @@ public class Main {
       option = in.nextInt();
 
       switch (option) {
-        case 1 -> BackTrackMenu();
+        case 1 -> backTrackMenu();
         case 2 -> geneticMenu();
         case 3 -> immunologicalMenu();
         case 4 -> antColonyMenu();
@@ -171,7 +171,7 @@ public class Main {
     } while (option != 0);
   }
 
-  public static void BackTrackMenu() {
+  public static void backTrackMenu() {
     System.out.println("\nBackTracking algorithm:\n");
 
     System.out.print("Inform the step (e.g. 0.25): ");
