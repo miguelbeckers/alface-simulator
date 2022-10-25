@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class BackTracking {
-  List<Parameter> parameters = new ArrayList<>();
-  Individual bestSolution;
+  private List<Parameter> parameters = new ArrayList<>();
+  private Individual bestSolution;
 
-  private class Node {
+  class Node {
     double value;
     List<Node> childs = new ArrayList<>();
 
@@ -19,7 +19,7 @@ public class BackTracking {
     }
   }
 
-  private class Tree {
+  class Tree {
     Node root;
 
     Tree() {
@@ -31,6 +31,29 @@ public class BackTracking {
     this.parameters = parameters;
     Individual individual = new Individual(parameters);
     bestSolution = individual;
+  }
+
+  public Individual solve(double individualValue, double step) {
+    bestSolution.fitness(individualValue);
+
+    Tree tree = buildTree(step);
+    List<List<Double>> allCombos = getallCombos(tree);
+
+    for (int i = 0; i < allCombos.size(); i++) {
+      Individual individual = new Individual(parameters);
+      List<Double> chromosome = new ArrayList<>(allCombos.get(i));
+
+      individual.setChromosome(chromosome);
+      individual.fitness(individualValue);
+      individual.setGeneration(i);
+      System.out.println(individual);
+
+      if (bestSolution.compareTo(individual) > 0) {
+        bestSolution = individual;
+      }
+    }
+
+    return bestSolution;
   }
 
   private Tree buildTree(double step) {
@@ -73,28 +96,5 @@ public class BackTracking {
     }
 
     combo.remove(combo.size() - 1);
-  }
-
-  public Individual solve(double individualValue, double step) {
-    bestSolution.fitness(individualValue);
-
-    Tree tree = buildTree(step);
-    List<List<Double>> allCombos = getallCombos(tree);
-
-    for (int i = 0; i < allCombos.size(); i++) {
-      Individual individual = new Individual(parameters);
-      List<Double> chromosome = new ArrayList<>(allCombos.get(i));
-
-      individual.setChromosome(chromosome);
-      individual.fitness(individualValue);
-      individual.setGeneration(i);
-      System.out.println(individual);
-
-      if (bestSolution.compareTo(individual) > 0) {
-        bestSolution = individual;
-      }
-    }
-
-    return bestSolution;
   }
 }
