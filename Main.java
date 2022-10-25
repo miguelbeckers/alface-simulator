@@ -1,5 +1,5 @@
 import algorithms.Genetic;
-import algorithms.BackTrack;
+import algorithms.BackTracking;
 import models.Individual;
 import models.Parameter;
 
@@ -31,9 +31,6 @@ public class Main {
     parameters.add(new Parameter("K", 0.0, 100.0, 2.0));
     parameters.add(new Parameter("N", 0.0, 100.0, 2.0));
     parameters.add(new Parameter("P", 0.0, 100.0, 2.0));
-
-    BackTrack backTrack = new BackTrack(parameters);
-    backTrack.solveAsTree(0.25);
 
     int option;
     do {
@@ -157,7 +154,7 @@ public class Main {
     do {
       System.out.println("\nSolver menu:\n");
       System.out.println("0 <- back");
-      System.out.println("1 -> BackTrack");
+      System.out.println("1 -> BackTracking");
       System.out.println("2 -> genetic");
       System.out.println("3 -> immunological");
       System.out.println("4 -> ant colony");
@@ -175,7 +172,7 @@ public class Main {
   }
 
   public static void BackTrackMenu() {
-    System.out.println("\nBackTrack algorithm:\n");
+    System.out.println("\nBackTracking algorithm:\n");
 
     System.out.print("Inform the step (e.g. 0.25): ");
     double step = in.nextDouble();
@@ -183,7 +180,7 @@ public class Main {
     System.out.print("Inform the the individual value (e.g. 14.00): ");
     double individualValue = in.nextDouble();
 
-    BackTrack backTrack = new BackTrack(parameters);
+    BackTracking backTrack = new BackTracking(parameters);
     Individual result = backTrack.solve(individualValue, step);
 
     System.out.println("\nThe solution is:");
