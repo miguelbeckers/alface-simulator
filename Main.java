@@ -1,5 +1,6 @@
 import algorithms.Genetic;
 import algorithms.BackTracking;
+import algorithms.Immunological;
 import models.Individual;
 import models.Parameter;
 
@@ -12,7 +13,9 @@ public class Main {
   static List<Parameter> parameters = new ArrayList<>();
   static Scanner in = new Scanner(System.in);
 
-  public static void main(String[] args) throws IOException {    
+  public static void main(String[] args) throws IOException {
+    Immunological immunological = new Immunological();
+
     System.out.println("""
 
                  ┌████┐ ┌██┐   ┌█████┐ ┌████┐ ┌█████┐┌█████┐
