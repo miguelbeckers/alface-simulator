@@ -54,4 +54,24 @@ public class Antibody implements Comparable<Antibody>{
   public int compareTo(Antibody antibody) {
     return antibody.getAfinity().compareTo(this.getAfinity());
   }
+
+  // def hipermutacao(clones, fator):
+  // hipermutados = []
+  // clones = [x[1] for x in clones]
+  // for i in clones:
+  //   aff = afinidade(i, numero)
+  //   taxaHip = (1 - (aff/121)) * fator
+  //   hipermutado = []
+  //   for j in i:
+  //     rand = random.random()
+  //     if rand <= taxaHip:
+  //       if j == 0:
+  //         hipermutado.append(1)
+  //       elif j == 1:
+  //         hipermutado.append(0)
+  //     else:
+  //       hipermutado.append(j)
+  //   dupla = [hipermutado, taxaHip]
+  //   hipermutados.append(dupla)
+  // return hipermutados
 }
