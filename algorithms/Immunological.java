@@ -51,6 +51,21 @@ public class Immunological {
     for (Antibody antibody : clones) {
       System.out.println(antibody.getAfinity() + " -> " + antibody.getLithChain());
     }
+
+    hypermutation(clones, 0.1, arrayWidth);
+    System.out.println("mutation: ");
+    for (Antibody antibody : clones) {
+      System.out.println(antibody.getAfinity() + " -> " + antibody.getLithChain());
+    }
+
+    for (Antibody antibody : population) {
+      antibody.fitness(antigen.getLithChain());
+    }
+
+    System.out.println("fitness: ");
+    for (Antibody antibody : clones) {
+      System.out.println(antibody.getAfinity() + " -> " + antibody.getLithChain());
+    }
   }
 
   public List<Antibody> getBestResults(int quantity) {
@@ -102,11 +117,19 @@ public class Immunological {
       double mutationRate = (1 - (afinity/arrayWidth)) * factor;
       List<Integer> lightChain = new ArrayList<>();
       for(int i = 0; i < clone.getLithChain().size(); i++){
-        double randNumer = 0.5;
-        if(randNumer <= mutationRate){
-          // lightChain.get(i) = 
+        double randomValue = Math.random();
+        if(randomValue <= mutationRate){
+          if(clone.getLithChain().get(i) == 0){
+            lightChain.add(1);
+          } else {
+            lightChain.add(0);
+          }
+        } else {
+          lightChain.add(clone.getLithChain().get(i));
         }
       }
+      clone.setLightChain(lightChain);
+      hipermutateds.add(clone);
     }
   }
 }
