@@ -17,6 +17,8 @@ public class Antibody implements Comparable<Antibody>{
   }
 
   public void print(int arrayWidth){
+    System.out.println(afinity);
+    
     int count = 0;
     for (int i = 0; i < lightChain.size(); i++) {
       System.out.print(lightChain.get(i) == 0 ? "." : "@");
