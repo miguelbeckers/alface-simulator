@@ -22,19 +22,20 @@ public class Immunological {
         0, 0, 1, 1, 1, 0,
         0, 1, 0, 0, 0, 1,
         0, 0, 1, 1, 1, 0);
-
     antigen = new Antibody(arrayWidth);
     antigen.setLightChain(lightChain);
+    antigen.fitness(lightChain);
 
     for (int i = 0; i < populationSize; i++) {
       population.add(new Antibody(arrayWidth));
     }
 
-    solve(1000);
+    solve(1);
   }
 
   public void solve(int generations){
     int arrayWidth = 6;
+    // antigen.print(arrayWidth);
     
     for (Antibody antibody : population) {
       antibody.fitness(antigen.getLithChain());
@@ -43,58 +44,36 @@ public class Immunological {
     sortPopulation();
 
     for(int i = 0; i < generations; i++){
-      // System.out.println("########## population: " + i + " size: " + population.size());
-      // printChains(population);
-      
+      // population.get(0).print(arrayWidth); 
+
       List<Antibody> bestResults = getBestResults(3);
-      // System.out.println("bestResults: ");
-      // printChains(bestResults);
-
       List<Antibody> clones = getClones(17, bestResults);
-      // System.out.println("clones: ");
-      // printChains(clones);
 
-      hypermutation(clones, 0.01, arrayWidth);
-      // System.out.println("hypermuted clones: ");
-      // printChains(clones);
+      hypermutation(clones, 0.1, arrayWidth);
 
       List<Antibody> newPopulation = clones;
-      // System.out.println("new population with clones: ");
-      // printChains(newPopulation);
-
       int numberOfNewAntibodies = population.size() - clones.size();
 
       for(int j = 0; j < numberOfNewAntibodies; j++){
         newPopulation.add(new Antibody(arrayWidth));
       }
-      // System.out.println("new population with new antibodies: ");
-      // printChains(newPopulation);
 
       for (Antibody antibody : newPopulation) {
         antibody.fitness(antigen.getLithChain());
       }
-      // System.out.println("new population after fitness: ");
-      // printChains(newPopulation);
 
       population = newPopulation;
-      // System.out.println("updated population: ");
-      // printChains(newPopulation);
 
       sortPopulation();
-      // System.out.println("sorted population: ");
-      // printChains(newPopulation);
 
       bestSolution = population.get(0);
-      // System.out.println("best result: ");
-      System.out.println(i + " -> " + bestSolution.getAfinity() + "/" + (arrayWidth*arrayWidth));
-
-      // bestSolution.print(arrayWidth);
+      // System.out.println(i + " -> " + bestSolution.getAfinity() + "/" + (arrayWidth*arrayWidth));
     }
   }
 
   public void printChains(List<Antibody> antibodies){
     for(Antibody antibody : antibodies){
-      System.out.println(antibody.getAfinity() + " -> " + antibody.getLithChain());
+      // System.out.println(antibody.getAfinity() + " -> " + antibody.getLithChain());
     }
   }
 
@@ -136,6 +115,10 @@ public class Immunological {
   public void hypermutation(List<Antibody> clones, double factor, int arrayWidth) {
     arrayWidth *= arrayWidth;
     
+    for(Antibody clone : clones){
+      System.out.println(clone.getAfinity() + " -> " + clone.getLithChain());
+    }
+
     List<Antibody> hipermutateds = new ArrayList<>();
     for(Antibody clone : clones){
       double afinity = clone.getAfinity();
@@ -156,6 +139,8 @@ public class Immunological {
         }
       }
       clone.setLightChain(lightChain);
+      clone.fitness(antigen.getLithChain());
+      System.out.println(clone.getAfinity() + " -> " + clone.getLithChain() + " -> " + mutationRate);
       hipermutateds.add(clone);
     }
   }
