@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Tree {
   private Node root;
-  private int numberOfParameters;
-  private double step;
+  private int levelNumber;
+  private double childNumber;
 
-  public Tree(int numberOfParameters, double step) {
+  public Tree(int levelNumber, double childNumber) {
     this.root = new Node(-1);
-    this.numberOfParameters = numberOfParameters;
-    this.step = step;
+    this.levelNumber = levelNumber;
+    this.childNumber = childNumber;
 
     build();
   }
@@ -21,11 +21,11 @@ public class Tree {
   }
 
   private void createChilds(Node root, int level) {
-    for (double i = 0; i <= 1; i += step) {
+    for (double i = 0; i <= 1; i += childNumber) {
       Node node = new Node(i);
       root.getChilds().add(node);
 
-      if (level < numberOfParameters) {
+      if (level < levelNumber) {
         createChilds(node, level + 1);
       }
     }
@@ -49,7 +49,7 @@ public class Tree {
       getCombo(node.getChilds().get(i), combo, allCombos);
     }
 
-    if (combo.size() - 1 == numberOfParameters ) {
+    if (combo.size() - 1 == levelNumber ) {
       allCombos.add(new ArrayList<>(combo));
     }
 

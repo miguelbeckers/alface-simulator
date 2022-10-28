@@ -22,6 +22,10 @@ public class BackTracking {
 
     Tree tree = new Tree(parameters.size(), step);
     List<List<Double>> allCombos = tree.getAllCombos();
+    
+    for(int i = 0; i < allCombos.size(); i++){
+      System.out.println(allCombos.get(i));
+    }
 
     for (int i = 0; i < allCombos.size(); i++) {
       Individual individual = new Individual(parameters);
