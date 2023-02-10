@@ -12,9 +12,20 @@ public class Genetic {
 
   public Genetic(int populationSize, List<Parameter> parameters) {
     for (int i = 0; i < populationSize; i++) {
-      population.add(new Individual(parameters));
+      List<Double> chromosome = getRandomChromosome(parameters);
+      population.add(new Individual(parameters, chromosome));
     }
     bestSolution = population.get(0);
+  }
+
+  private List<Double> getRandomChromosome(List<Parameter> parameters) {
+    List<Double> chromosome = new ArrayList<>();
+    
+    for (int i = 0; i < parameters.size(); i++) {
+      chromosome.add((double) Math.round(Math.random() * 100) / 100);
+    }
+
+    return chromosome;
   }
 
   private void sortPopulation() {
@@ -34,8 +45,9 @@ public class Genetic {
   }
 
   public Individual solve(double value, double mutationRate, int generations) {
-    for (Individual individual : population)
-      individual.fitness(value);
+    for (Individual individual : population) {
+      individual.evaluate(value);
+    }
 
     sortPopulation();
     bestSolution = population.get(0);
@@ -69,7 +81,7 @@ public class Genetic {
       setPopulation(newPopulation);
 
       for (Individual individual : population) {
-        individual.fitness(value);
+        individual.evaluate(value);
       }
 
       sortPopulation();

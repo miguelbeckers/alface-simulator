@@ -178,7 +178,7 @@ public class Main {
     System.out.print("Inform the step (e.g. 0.25): ");
     double step = in.nextDouble();
 
-    System.out.print("Inform the the individual value (e.g. 14.00): ");
+    System.out.print("Inform the individual value (e.g. 14.00): ");
     double individualValue = in.nextDouble();
 
     BackTracking backTrack = new BackTracking(parameters);

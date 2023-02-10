@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Product implements Comparable<Product> {
-  Long id = 0L;
-  List<Parameter> parameters;
-  Double cost;
-  Double value;
-  Double profit;
-  Double mass;
-  List<Double> quantities = new ArrayList<>();
+  protected Long id = 0L;
+  protected List<Parameter> parameters;
+  protected Double cost;
+  protected Double value;
+  protected Double profit;
+  protected Double mass;
+  protected List<Double> quantities = new ArrayList<>();
 
   public Product(List<Parameter> parameters, List<Double> quantities) {
     this.parameters = parameters;
