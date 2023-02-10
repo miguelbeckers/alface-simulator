@@ -1,4 +1,4 @@
-package models;
+package algorithms.Backtracking;
 
 import java.util.ArrayList;
 import java.util.List;

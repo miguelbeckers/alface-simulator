@@ -1,7 +1,8 @@
-import algorithms.Genetic;
-import algorithms.BackTracking;
-import models.Individual;
-import models.Parameter;
+import algorithms.Backtracking.BackTracking;
+import algorithms.Genetic.Genetic;
+import algorithms.Genetic.Individual;
+import model.Parameter;
+import model.Product;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -163,7 +164,7 @@ public class Main {
       option = in.nextInt();
 
       switch (option) {
-        case 1 -> backTrackMenu();
+        case 1 -> backTrackingMenu();
         case 2 -> geneticMenu();
         case 3 -> immunologicalMenu();
         case 4 -> antColonyMenu();
@@ -171,7 +172,7 @@ public class Main {
     } while (option != 0);
   }
 
-  public static void backTrackMenu() {
+  public static void backTrackingMenu() {
     System.out.println("\nBackTracking algorithm:\n");
 
     System.out.print("Inform the step (e.g. 0.25): ");
@@ -181,7 +182,7 @@ public class Main {
     double individualValue = in.nextDouble();
 
     BackTracking backTrack = new BackTracking(parameters);
-    Individual result = backTrack.solve(individualValue, step);
+    Product result = backTrack.solve(individualValue, step);
 
     System.out.println("\nThe solution is:");
     System.out.println(result);
