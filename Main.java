@@ -1,6 +1,7 @@
 import algorithms.Backtracking.BackTracking;
 import algorithms.Genetic.Genetic;
 import algorithms.Genetic.Individual;
+import algorithms.Immunological.Immunological;
 import model.Parameter;
 import model.Product;
 
@@ -14,6 +15,9 @@ public class Main {
   static Scanner in = new Scanner(System.in);
 
   public static void main(String[] args) throws IOException {
+    Immunological immunological = new Immunological();
+
+
     System.out.println("""
 
                  ┌████┐ ┌██┐   ┌█████┐ ┌████┐ ┌█████┐┌█████┐
