@@ -1,228 +1,249 @@
 import algorithms.Backtracking.BackTracking;
 import algorithms.Genetic.Genetic;
 import algorithms.Genetic.Individual;
+import algorithms.Immunological.Antibody;
 import algorithms.Immunological.Immunological;
 import model.Parameter;
 import model.Product;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-  static List<Parameter> parameters = new ArrayList<>();
-  static Scanner in = new Scanner(System.in);
+    static List<Parameter> parameters = new ArrayList<>();
+    static Scanner in = new Scanner(System.in);
 
-  public static void main(String[] args) throws IOException {
-    Immunological immunological = new Immunological();
+    public static void main(String[] args) {
+        System.out.println("""
 
+                         ┌████┐ ┌██┐   ┌█████┐ ┌████┐ ┌█████┐┌█████┐
+                        ┌██┌┐██┐│██│   │██┌──┘┌██┌┐██┐│██┌──┘│██┌──┘
+                        │██████││██│   │████┐ │██████││██│   │████┐
+                        │██┌┐██││██│   │██┌─┘ │██┌┐██││██│   │██┌─┘
+                ┌██████┐│██││██││█████┐│██│   │██││██││█████┐│█████┐┌██████┐
+                └──────┘└──┘└──┘└─────┘└──┘   └──┘└──┘└─────┘└─────┘└──────┘
+                        ╔═╗                   ╔══╗         ╔═╗
+                ╔═══╗   ╚═╝                   ╚╗ ║   ╔═══╗ ║ ║
+                ║ ══╩═╗╔══╗ ╔═════════╗╔═╗ ╔═╗ ║ ║ ╔═╩══ ║╔╝ ╚═╗╔═════╗╔════╗
+                ╚═══╗ ║╚╗ ║ ║ ╔═╗ ╔═╗ ║║ ║ ║ ║ ║ ║ ║ ╔═╗ ║╚╗ ╔═╝║ ╔═╗ ║║ ╔══╝
+                ╔═══╝ ║ ║ ╚╗║ ║ ║ ║ ║ ║║ ╚═╝ ║ ║ ╚╗║ ╚═╝ ║ ║ ╚╗ ║ ╚═╝ ║║ ║
+                ╚═════╝ ╚══╝╚═╝ ╚═╝ ╚═╝╚═════╝ ╚══╝╚═════╝ ╚══╝ ╚═════╝╚═╝""");
 
-    System.out.println("""
+        parameters.add(new Parameter("K", 0.0, 100.0, 2.0));
+        parameters.add(new Parameter("N", 0.0, 100.0, 2.0));
+        parameters.add(new Parameter("P", 0.0, 100.0, 2.0));
 
-                 ┌████┐ ┌██┐   ┌█████┐ ┌████┐ ┌█████┐┌█████┐
-                ┌██┌┐██┐│██│   │██┌──┘┌██┌┐██┐│██┌──┘│██┌──┘
-                │██████││██│   │████┐ │██████││██│   │████┐
-                │██┌┐██││██│   │██┌─┘ │██┌┐██││██│   │██┌─┘
-        ┌██████┐│██││██││█████┐│██│   │██││██││█████┐│█████┐┌██████┐
-        └──────┘└──┘└──┘└─────┘└──┘   └──┘└──┘└─────┘└─────┘└──────┘
-                ╔═╗                   ╔══╗         ╔═╗
-        ╔═══╗   ╚═╝                   ╚╗ ║   ╔═══╗ ║ ║
-        ║ ══╩═╗╔══╗ ╔═════════╗╔═╗ ╔═╗ ║ ║ ╔═╩══ ║╔╝ ╚═╗╔═════╗╔════╗
-        ╚═══╗ ║╚╗ ║ ║ ╔═╗ ╔═╗ ║║ ║ ║ ║ ║ ║ ║ ╔═╗ ║╚╗ ╔═╝║ ╔═╗ ║║ ╔══╝
-        ╔═══╝ ║ ║ ╚╗║ ║ ║ ║ ║ ║║ ╚═╝ ║ ║ ╚╗║ ╚═╝ ║ ║ ╚╗ ║ ╚═╝ ║║ ║
-        ╚═════╝ ╚══╝╚═╝ ╚═╝ ╚═╝╚═════╝ ╚══╝╚═════╝ ╚══╝ ╚═════╝╚═╝""");
+        int option;
+        do {
+            System.out.println("\nMain menu:\n");
+            System.out.println("1 -> parameters");
+            System.out.println("2 -> solver");
+            System.out.println("3 -> exit");
+            System.out.print("\nselect: ");
 
-    parameters.add(new Parameter("K", 0.0, 100.0, 2.0));
-    parameters.add(new Parameter("N", 0.0, 100.0, 2.0));
-    parameters.add(new Parameter("P", 0.0, 100.0, 2.0));
+            option = in.nextInt();
 
-    int option;
-    do {
-      System.out.println("\nMain menu:\n");
-      System.out.println("1 -> parameters");
-      System.out.println("2 -> solver");
-      System.out.println("3 -> exit");
-      System.out.print("\nselect: ");
-
-      option = in.nextInt();
-
-      switch (option) {
-        case 1 -> showParametersMenu();
-        case 2 -> showSolverMenu();
-      }
-    } while (option != 3);
-  }
-
-  public static void showParametersMenu() {
-    int option;
-    do {
-      System.out.println("\nParameters menu:\n");
-      System.out.println("0 <- back");
-      System.out.println("1 -> show");
-      System.out.println("2 -> add");
-      System.out.println("3 -> edit");
-      System.out.println("4 -> remove");
-      System.out.print("\nselect: ");
-
-      option = in.nextInt();
-
-      switch (option) {
-        case 1 -> showParameters();
-        case 2 -> addParameter();
-        case 3 -> editParameter();
-        case 4 -> removeParameter();
-      }
-    } while (option != 0);
-  }
-
-  public static void showParameters() {
-    System.out.println("\nParameter list:\n");
-    if (parameters.size() == 0) {
-      System.out.println("The parameters list is empty");
-      return;
-    }
-    for (int i = 0; i < parameters.size(); i++) {
-      System.out.println(i + " - " + parameters.get(i).toString());
-    }
-  }
-
-  public static void addParameter() {
-    System.out.println("\nAdd parameter:\n");
-    in.nextLine();
-
-    System.out.print("Inform the parameter name: ");
-    String name = in.nextLine();
-
-    System.out.print("Inform the minimum value: ");
-    double minValue = in.nextDouble();
-
-    System.out.print("Inform the maximum value: ");
-    double maxValue = in.nextDouble();
-
-    System.out.print("Inform the parameter cost: ");
-    double cost = in.nextDouble();
-
-    parameters.add(new Parameter(name, minValue, maxValue, cost));
-    System.out.println("\nThe parameter has been added");
-  }
-
-  public static void editParameter() {
-    System.out.println("\nEdit parameter:\n");
-
-    System.out.print("Inform the parameter index: ");
-    int index = in.nextInt();
-
-    if (index >= parameters.size() || index < 0) {
-      System.out.println("\nParameter not found");
-      return;
+            switch (option) {
+                case 1 -> showParametersMenu();
+                case 2 -> showSolverMenu();
+            }
+        } while (option != 3);
     }
 
-    in.nextLine();
-    System.out.print("Inform the parameter name: ");
-    String name = in.nextLine();
+    public static void showParametersMenu() {
+        int option;
+        do {
+            System.out.println("\nParameters menu:\n");
+            System.out.println("0 <- back");
+            System.out.println("1 -> show");
+            System.out.println("2 -> add");
+            System.out.println("3 -> edit");
+            System.out.println("4 -> remove");
+            System.out.print("\nselect: ");
 
-    System.out.print("Inform the minimum value: ");
-    double minValue = in.nextDouble();
+            option = in.nextInt();
 
-    System.out.print("Inform the maximum value: ");
-    double maxValue = in.nextDouble();
-
-    System.out.print("Inform the parameter cost: ");
-    double cost = in.nextDouble();
-
-    parameters.get(index).setName(name);
-    parameters.get(index).setMinValue(minValue);
-    parameters.get(index).setMaxValue(maxValue);
-    parameters.get(index).setCost(cost);
-
-    System.out.println("\nThe parameter has been updated");
-  }
-
-  public static void removeParameter() {
-    System.out.println("\nRemove parameter:\n");
-
-    System.out.print("Inform the parameter index: ");
-    int index = in.nextInt();
-
-    if (index >= parameters.size() || index < 0) {
-      System.out.println("\nParameter not found");
-      return;
+            switch (option) {
+                case 1 -> showParameters();
+                case 2 -> addParameter();
+                case 3 -> editParameter();
+                case 4 -> removeParameter();
+            }
+        } while (option != 0);
     }
 
-    parameters.remove(index);
-    System.out.println("\nThe parameter has been removed");
-  }
+    public static void showParameters() {
+        System.out.println("\nParameter list:\n");
+        if (parameters.size() == 0) {
+            System.out.println("The parameters list is empty");
+            return;
+        }
+        for (int i = 0; i < parameters.size(); i++) {
+            System.out.println(i + " - " + parameters.get(i).toString());
+        }
+    }
 
-  public static void showSolverMenu() {
-    int option;
-    do {
-      System.out.println("\nSolver menu:\n");
-      System.out.println("0 <- back");
-      System.out.println("1 -> backTracking");
-      System.out.println("2 -> genetic");
-      System.out.println("3 -> immunological");
-      System.out.println("4 -> ant colony");
-      System.out.print("\nselect: ");
+    public static void addParameter() {
+        System.out.println("\nAdd parameter:\n");
+        in.nextLine();
 
-      option = in.nextInt();
+        System.out.print("Inform the parameter name: ");
+        String name = in.nextLine();
 
-      switch (option) {
-        case 1 -> backTrackingMenu();
-        case 2 -> geneticMenu();
-        case 3 -> immunologicalMenu();
-        case 4 -> antColonyMenu();
-      }
-    } while (option != 0);
-  }
+        System.out.print("Inform the minimum value: ");
+        double minValue = in.nextDouble();
 
-  public static void backTrackingMenu() {
-    System.out.println("\nBackTracking algorithm:\n");
+        System.out.print("Inform the maximum value: ");
+        double maxValue = in.nextDouble();
 
-    System.out.print("Inform the step (e.g. 0.25): ");
-    double step = in.nextDouble();
+        System.out.print("Inform the parameter cost: ");
+        double cost = in.nextDouble();
 
-    System.out.print("Inform the individual value (e.g. 14.00): ");
-    double individualValue = in.nextDouble();
+        parameters.add(new Parameter(name, minValue, maxValue, cost));
+        System.out.println("\nThe parameter has been added");
+    }
 
-    BackTracking backTrack = new BackTracking(parameters);
-    Product result = backTrack.solve(individualValue, step);
+    public static void editParameter() {
+        System.out.println("\nEdit parameter:\n");
 
-    System.out.println("\nThe solution is:");
-    System.out.println(result);
-    System.out.println(result.getValues());
-  }
+        System.out.print("Inform the parameter index: ");
+        int index = in.nextInt();
 
-  public static void geneticMenu() {
-    System.out.println("\nGenetic algorithm:\n");
+        if (index >= parameters.size() || index < 0) {
+            System.out.println("\nParameter not found");
+            return;
+        }
 
-    System.out.print("Inform the population size (e.g. 20): ");
-    int populationSize = in.nextInt();
+        in.nextLine();
+        System.out.print("Inform the parameter name: ");
+        String name = in.nextLine();
 
-    System.out.print("Inform the the individual value (e.g. 14.00): ");
-    double individualValue = in.nextDouble();
+        System.out.print("Inform the minimum value: ");
+        double minValue = in.nextDouble();
 
-    System.out.print("Inform the the mutation rate (e.g. 0.1): ");
-    double mutationRate = in.nextDouble();
+        System.out.print("Inform the maximum value: ");
+        double maxValue = in.nextDouble();
 
-    System.out.print("Inform the the generation number (e.g. 100): ");
-    int generationNumber = in.nextInt();
+        System.out.print("Inform the parameter cost: ");
+        double cost = in.nextDouble();
 
-    Genetic genetic = new Genetic(populationSize, parameters);
-    Individual result = genetic.solve(individualValue, mutationRate, generationNumber);
+        parameters.get(index).setName(name);
+        parameters.get(index).setMinValue(minValue);
+        parameters.get(index).setMaxValue(maxValue);
+        parameters.get(index).setCost(cost);
 
-    System.out.println("\nThe solution is:");
-    System.out.println(result);
-    System.out.println(result.getValues());
-  }
+        System.out.println("\nThe parameter has been updated");
+    }
 
-  public static void immunologicalMenu() {
-    System.out.println("\nImmunological algorithm:\n");
-    System.out.println("The immunological algorithm is not implemented yet");
-  }
+    public static void removeParameter() {
+        System.out.println("\nRemove parameter:\n");
 
-  public static void antColonyMenu() {
-    System.out.println("\nAnt Colony algorithm:\n");
-    System.out.println("The ant colony algorithm is not implemented yet");
-  }
+        System.out.print("Inform the parameter index: ");
+        int index = in.nextInt();
+
+        if (index >= parameters.size() || index < 0) {
+            System.out.println("\nParameter not found");
+            return;
+        }
+
+        parameters.remove(index);
+        System.out.println("\nThe parameter has been removed");
+    }
+
+    public static void showSolverMenu() {
+        int option;
+        do {
+            System.out.println("\nSolver menu:\n");
+            System.out.println("0 <- back");
+            System.out.println("1 -> backTracking");
+            System.out.println("2 -> genetic");
+            System.out.println("3 -> immunological");
+            System.out.println("4 -> ant colony");
+            System.out.print("\nselect: ");
+
+            option = in.nextInt();
+
+            switch (option) {
+                case 1 -> backTrackingMenu();
+                case 2 -> geneticMenu();
+                case 3 -> immunologicalMenu();
+                case 4 -> antColonyMenu();
+            }
+        } while (option != 0);
+    }
+
+    public static void backTrackingMenu() {
+        System.out.println("\nBackTracking algorithm:\n");
+
+        System.out.print("Inform the step (e.g. 0.25): ");
+        double step = in.nextDouble();
+
+        System.out.print("Inform the individual value (e.g. 14.00): ");
+        double productValue = in.nextDouble();
+
+        BackTracking backTrack = new BackTracking(parameters);
+        Product result = backTrack.solve(productValue, step);
+
+        System.out.println("\nThe solution is:");
+        System.out.println(result);
+        System.out.println(result.getValues());
+    }
+
+    public static void geneticMenu() {
+        System.out.println("\nGenetic algorithm:\n");
+
+        System.out.print("Inform the population size (e.g. 20): ");
+        int populationSize = in.nextInt();
+
+        System.out.print("Inform the the individual value (e.g. 14.00): ");
+        double productValue = in.nextDouble();
+
+        System.out.print("Inform the the mutation rate (e.g. 0.1): ");
+        double mutationRate = in.nextDouble();
+
+        System.out.print("Inform the the generation number (e.g. 100): ");
+        int generationNumber = in.nextInt();
+
+        Genetic genetic = new Genetic(populationSize, parameters);
+        Individual result = genetic.solve(productValue, mutationRate, generationNumber);
+
+        System.out.println("\nThe solution is:");
+        System.out.println(result);
+        System.out.println(result.getValues());
+    }
+
+    public static void immunologicalMenu() {
+        System.out.println("\nImmunological algorithm:\n");
+
+        System.out.print("Inform the the individual value (e.g. 14.00): ");
+        double productValue = in.nextDouble();
+
+        System.out.print("Inform the population size (e.g. 20): ");
+        int populationSize = in.nextInt();
+
+        System.out.print("Inform the generation number (e.g. 100): ");
+        int generations = in.nextInt();
+
+        System.out.print("Inform the hypermutation factor (e.g. 0.1): ");
+        double hyperFactor = in.nextDouble();
+
+        System.out.print("Inform the number of best antibodies to clone (e.g. 3): ");
+        int bestsQuantity = in.nextInt();
+
+        System.out.print("Inform the objective value (e.g. 15): ");
+        double objective = in.nextDouble();
+
+        Immunological immunological = new Immunological(populationSize, parameters);
+        Antibody result = immunological.solve(parameters, productValue, generations, bestsQuantity, hyperFactor, objective);
+
+        System.out.println("\nThe solution is:");
+        System.out.println(result);
+        System.out.println(result.getValues());
+    }
+
+    public static void antColonyMenu() {
+        System.out.println("\nAnt Colony algorithm:\n");
+        System.out.println("The ant colony algorithm is not implemented yet");
+    }
 }

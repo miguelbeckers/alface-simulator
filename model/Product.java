@@ -4,14 +4,14 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product implements Comparable<Product> {
+public class Product implements Cloneable, Comparable<Product> {
   protected Long id = 0L;
   protected List<Parameter> parameters;
   protected Double cost;
   protected Double value;
   protected Double profit;
   protected Double mass;
-  protected List<Double> quantities = new ArrayList<>();
+  protected List<Double> quantities;
 
   public Product(List<Parameter> parameters, List<Double> quantities) {
     this.parameters = parameters;
@@ -31,7 +31,7 @@ public class Product implements Comparable<Product> {
     this.mass = Math.log(result + 1) / 3;
   }
 
-  public void evaluate(double valuePerKilogram) {
+  public void fitness(double valuePerKilogram) {
     calculateCost();
     calculateMass();
 
@@ -67,8 +67,8 @@ public class Product implements Comparable<Product> {
     return quantities;
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  public void setQuantities(List<Double> quantities){
+    this.quantities = quantities;
   }
 
   public String getValues() {
@@ -86,6 +86,10 @@ public class Product implements Comparable<Product> {
     return values.toString();
   }
 
+  public void setId(Long id) {
+    this.id = id;
+  }
+
   @Override
   public String toString() {
     return "id: " + this.getId()
@@ -93,6 +97,17 @@ public class Product implements Comparable<Product> {
         + "\tValue: " + new DecimalFormat("R$ #,##0.00").format(this.getValue())
         + "\tCost: " + new DecimalFormat("R$ #,##0.00").format(this.getCost())
         + "\tProfit: " + new DecimalFormat("R$ #,##0.00").format(this.getProfit());
+  }
+
+  @Override
+  public Product clone() {
+    try {
+      Product clone = (Product) super.clone();
+      clone.setQuantities(new ArrayList<>(quantities));
+      return clone;
+    } catch (CloneNotSupportedException e) {
+      throw new AssertionError();
+    }
   }
 
   @Override

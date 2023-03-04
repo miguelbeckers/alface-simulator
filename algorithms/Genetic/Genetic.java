@@ -20,11 +20,9 @@ public class Genetic {
 
   private List<Double> getRandomChromosome(List<Parameter> parameters) {
     List<Double> chromosome = new ArrayList<>();
-    
     for (int i = 0; i < parameters.size(); i++) {
       chromosome.add((double) Math.round(Math.random() * 100) / 100);
     }
-
     return chromosome;
   }
 
@@ -46,12 +44,11 @@ public class Genetic {
 
   public Individual solve(double value, double mutationRate, int generations) {
     for (Individual individual : population) {
-      individual.evaluate(value);
+      individual.fitness(value);
     }
 
     sortPopulation();
     bestSolution = population.get(0);
-    bestSolution.toString();
 
     for (int i = 0; i < generations; i++) {
       double sumOfProfits = 0.0;
@@ -81,7 +78,7 @@ public class Genetic {
       setPopulation(newPopulation);
 
       for (Individual individual : population) {
-        individual.evaluate(value);
+        individual.fitness(value);
       }
 
       sortPopulation();
@@ -97,13 +94,5 @@ public class Genetic {
 
   private void setPopulation(List<Individual> population) {
     this.population = population;
-  }
-
-  public List<Individual> getPopulation() {
-    return population;
-  }
-
-  public Individual getBestSolution() {
-    return bestSolution;
   }
 }

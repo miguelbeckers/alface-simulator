@@ -1,72 +1,80 @@
 package algorithms.Immunological;
 
-import java.util.Arrays;
+import model.Parameter;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Immunological {
-    private final Antibody antigen;
     private List<Antibody> population = new ArrayList<>();
     private Antibody bestSolution;
 
-    public Immunological() {
-        int arrayWidth = 6;
-        int populationSize = 20;
-
-        List<Integer> lightChain = Arrays.asList(
-                0, 0, 0, 0, 0, 0,
-                0, 0, 1, 1, 1, 0,
-                0, 1, 0, 0, 0, 1,
-                0, 0, 1, 1, 1, 0,
-                0, 1, 0, 0, 0, 1,
-                0, 0, 1, 1, 1, 0);
-        antigen = new Antibody(arrayWidth);
-        antigen.setLightChain(lightChain);
-        antigen.fitness(lightChain);
-
+    public Immunological(int populationSize, List<Parameter> parameters) {
         for (int i = 0; i < populationSize; i++) {
-            population.add(new Antibody(arrayWidth));
+            List<Double> lightChain = getRandomLightChain(parameters);
+            population.add(new Antibody(parameters, lightChain));
         }
-
-        solve(100);
+        bestSolution = population.get(0);
     }
 
-    public void solve(int generations) {
-        int arrayWidth = 6;
+    private List<Double> getRandomLightChain(List<Parameter> parameters) {
+        List<Double> lightChain = new ArrayList<>();
+        for (int i = 0; i < parameters.size(); i++) {
+            lightChain.add((double) Math.round(Math.random() * 100) / 100);
+        }
+        return lightChain;
+    }
 
+    private void sortPopulation() {
+        Collections.sort(population);
+    }
+
+    public Antibody solve(List<Parameter> parameters, double value, int generations, int quantity, double factor, double objective) {
         for (Antibody antibody : population) {
-            antibody.fitness(antigen.getLightChain());
+            antibody.fitness(value);
         }
 
         sortPopulation();
 
         for (int i = 0; i < generations; i++) {
-            List<Antibody> bestResults = getBestResults(3);
+            List<Antibody> bestResults = getBestResults(quantity);
+            List<Antibody> clones = getClones(population.size() - quantity, bestResults);
 
-            List<Antibody> clones = getClones(17, bestResults);
+            for (Antibody clone : clones) {
+                clone.fitness(value);
+            }
 
-            hypermutation(clones, 0.1, arrayWidth);
+            for (Antibody clone : clones) {
+                clone.hypermutation(value, factor, objective);
+            }
 
             int numberOfNewAntibodies = population.size() - clones.size();
 
             for (int j = 0; j < numberOfNewAntibodies; j++) {
-                clones.add(new Antibody(arrayWidth));
+                List<Double> lightChain = getRandomLightChain(parameters);
+                clones.add(new Antibody(parameters, lightChain));
             }
 
             for (Antibody antibody : clones) {
-                antibody.fitness(antigen.getLightChain());
+                antibody.fitness(value);
+            }
+
+            for (Antibody antibody : clones) {
+                antibody.setId((long) i);
             }
 
             population = clones;
-
             sortPopulation();
 
-            bestSolution = population.get(0);
-            bestSolution.print(arrayWidth);
-            System.out.println(i + " -> " + bestSolution.getAffinity()
-                    + "/" + (arrayWidth * arrayWidth) + "\n");
+            System.out.println(population.get(0).toString());
+
+            if (bestSolution.compareTo(population.get(0)) > 0) {
+                bestSolution = population.get(0);
+            }
         }
+
+        return bestSolution;
     }
 
     public List<Antibody> getBestResults(int quantity) {
@@ -75,10 +83,6 @@ public class Immunological {
             bestResults.add(population.get(i));
         }
         return bestResults;
-    }
-
-    public void sortPopulation() {
-        Collections.sort(population);
     }
 
     public List<Antibody> getClones(int value, List<Antibody> selected) {
@@ -100,42 +104,10 @@ public class Immunological {
 
         for (int i = 0; i < selected.size(); i++) {
             for (int j = 0; j < duplications.get(i); j++) {
-                clones.add(selected.get(i).clone());
+                clones.add((Antibody) selected.get(i).clone());
             }
         }
 
         return clones;
-    }
-
-    public void hypermutation(List<Antibody> clones, double factor, int arrayWidth) {
-        arrayWidth *= arrayWidth;
-
-        for (Antibody clone : clones) {
-            double affinity = clone.getAffinity();
-            double mutationRate = (1 - (affinity / arrayWidth)) * factor;
-
-            List<Integer> lightChain = new ArrayList<>();
-
-            for (int i = 0; i < clone.getLightChain().size(); i++) {
-                double randomValue = Math.random();
-
-                if (randomValue <= mutationRate) {
-                    if (clone.getLightChain().get(i) == 0) {
-                        lightChain.add(1);
-                    } else {
-                        lightChain.add(0);
-                    }
-                } else {
-                    lightChain.add(clone.getLightChain().get(i));
-                }
-            }
-
-            clone.setLightChain(lightChain);
-            clone.fitness(antigen.getLightChain());
-        }
-    }
-
-    public Antibody getBestSolution() {
-        return bestSolution;
     }
 }

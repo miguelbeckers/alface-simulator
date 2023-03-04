@@ -25,7 +25,7 @@ public class BackTracking {
   }
 
   public Product solve(double valuePerUnit, double step) {
-    bestSolution.evaluate(valuePerUnit);
+    bestSolution.fitness(valuePerUnit);
 
     Tree tree = new Tree(parameters.size(), step);
     List<List<Double>> allCombos = tree.getAllCombos();
@@ -34,7 +34,7 @@ public class BackTracking {
       List<Double> chromosome = new ArrayList<>(allCombos.get(i));
       Product product = new Product(parameters, chromosome);
 
-      product.evaluate(valuePerUnit);
+      product.fitness(valuePerUnit);
       product.setId((long) i);
       System.out.println(product);
 
