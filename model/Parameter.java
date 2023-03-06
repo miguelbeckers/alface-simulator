@@ -1,58 +1,72 @@
 package model;
 
 public class Parameter {
-  private String name;
-  private Double cost;
-  private Double minValue;
-  private Double maxValue;
+    private String name;
+    private Double cost;
+    private Double minValue;
+    private Double maxValue;
+    private Double influence;
 
-  public Parameter(String name, Double minValue, Double maxValue, Double cost) {
-    this.name = name;
-    this.minValue = minValue;
-    this.maxValue = maxValue;
-    this.cost = cost;
-  }
+    public Parameter(String name, Double minValue, Double maxValue, Double cost, Double influence) {
+        this.name = name;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+        this.cost = cost;
+        this.influence = influence;
+    }
 
-  public Double getValue(Double normalValue) {
-    if (normalValue < 0 || normalValue > 1)
-      throw new RuntimeException("Error: Expected a value between 0 and 1, received: " + normalValue);
-    return (maxValue - minValue) * normalValue + minValue;
-  }
+    public Double getValue(Double normalValue) {
+        if (normalValue < 0 || normalValue > 1)
+            throw new RuntimeException("Error: Expected a value between 0 and 1, received: " + normalValue);
+        return (maxValue - minValue) * normalValue + minValue;
+    }
 
-  public Double getCost() {
-    return cost;
-  }
+    public Double getInfluence() {
+        return influence;
+    }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+    public Double getCost() {
+        return cost;
+    }
 
-  public void setCost(Double cost) {
-    this.cost = cost;
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public void setMinValue(Double minValue) {
-    this.minValue = minValue;
-  }
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
 
-  public void setMaxValue(Double maxValue) {
-    this.maxValue = maxValue;
-  }
+    public void setInfluence(Double influence) {
+        this.influence = influence;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public void setMinValue(Double minValue) {
+        this.minValue = minValue;
+    }
 
-  public Double getMinValue() {
-    return minValue;
-  }
+    public void setMaxValue(Double maxValue) {
+        this.maxValue = maxValue;
+    }
 
-  public Double getMaxValue() {
-    return maxValue;
-  }
+    public String getName() {
+        return name;
+    }
 
-  @Override
-  public String toString() {
-    return "name: " + name + ", minValue: " + minValue + ", maxValue: " + maxValue + ", cost: " + cost;
-  }
+    public Double getMinValue() {
+        return minValue;
+    }
+
+    public Double getMaxValue() {
+        return maxValue;
+    }
+
+    @Override
+    public String toString() {
+        return "name: " + name +
+                ", minValue: " + minValue +
+                ", maxValue: " + maxValue +
+                ", cost: " + cost +
+                ", influence: " + influence;
+    }
 }

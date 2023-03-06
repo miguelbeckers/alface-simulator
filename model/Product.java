@@ -27,8 +27,8 @@ public class Product implements Cloneable, Comparable<Product> {
   }
 
   private void calculateMass() {
-    double result = quantities.stream().reduce(0.0, (sum, element) -> sum + (element * 10));
-    this.mass = Math.log(result + 1) / 3;
+    // calculate the mass for each parameter
+    // sum of all masses
   }
 
   public void fitness(double valuePerKilogram) {

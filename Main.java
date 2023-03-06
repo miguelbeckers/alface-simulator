@@ -30,9 +30,9 @@ public class Main {
                 ╔═══╝ ║ ║ ╚╗║ ║ ║ ║ ║ ║║ ╚═╝ ║ ║ ╚╗║ ╚═╝ ║ ║ ╚╗ ║ ╚═╝ ║║ ║
                 ╚═════╝ ╚══╝╚═╝ ╚═╝ ╚═╝╚═════╝ ╚══╝╚═════╝ ╚══╝ ╚═════╝╚═╝""");
 
-        parameters.add(new Parameter("K", 0.0, 100.0, 2.0));
-        parameters.add(new Parameter("N", 0.0, 100.0, 2.0));
-        parameters.add(new Parameter("P", 0.0, 100.0, 2.0));
+        parameters.add(new Parameter("K", 0.0, 100.0, 2.0, 0.5));
+        parameters.add(new Parameter("N", 0.0, 100.0, 2.0, 0.3));
+        parameters.add(new Parameter("P", 0.0, 100.0, 2.0, 0.2));
 
         int option;
         do {
@@ -100,7 +100,10 @@ public class Main {
         System.out.print("Inform the parameter cost: ");
         double cost = in.nextDouble();
 
-        parameters.add(new Parameter(name, minValue, maxValue, cost));
+        System.out.print("Inform the parameter influence: ");
+        double influence = in.nextDouble();
+
+        parameters.add(new Parameter(name, minValue, maxValue, cost, influence));
         System.out.println("\nThe parameter has been added");
     }
 
@@ -128,10 +131,14 @@ public class Main {
         System.out.print("Inform the parameter cost: ");
         double cost = in.nextDouble();
 
+        System.out.print("Inform the parameter influence: ");
+        double influence = in.nextDouble();
+
         parameters.get(index).setName(name);
         parameters.get(index).setMinValue(minValue);
         parameters.get(index).setMaxValue(maxValue);
         parameters.get(index).setCost(cost);
+        parameters.get(index).setInfluence(influence);
 
         System.out.println("\nThe parameter has been updated");
     }
