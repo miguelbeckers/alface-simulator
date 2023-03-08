@@ -6,6 +6,9 @@ import algorithms.Immunological.Immunological;
 import model.Parameter;
 import model.Product;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +18,49 @@ public class Main {
     static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
+//        double angle;
+//        double sen;
+//
+//        angle = 0;
+//        sen = Math.sin(Math.toRadians(angle));
+//        sen = (double) Math.round(sen * 100) / 100;
+//        System.out.println("angle: " + angle + " | sen: " + sen);
+//
+//        angle = 15;
+//        sen = Math.sin(Math.toRadians(angle));
+//        sen = (double) Math.round(sen * 100) / 100;
+//        System.out.println("angle: " + angle + " | sen: " + sen);
+//
+//        angle = 30;
+//        sen = Math.sin(Math.toRadians(angle));
+//        sen = (double) Math.round(sen * 100) / 100;
+//        System.out.println("angle: " + angle + " | sen: " + sen);
+//
+//        angle = 45;
+//        sen = Math.sin(Math.toRadians(angle));
+//        sen = (double) Math.round(sen * 100) / 100;
+//        System.out.println("angle: " + angle + " | sen: " + sen);
+//
+//        angle = 90;
+//        sen = Math.sin(Math.toRadians(angle));
+//        sen = (double) Math.round(sen * 100) / 100;
+//        System.out.println("angle: " + angle + " | sen: " + sen);
+//
+//        angle = 180;
+//        sen = Math.sin(Math.toRadians(angle));
+//        sen = (double) Math.round(sen * 100) / 100;
+//        System.out.println("angle: " + angle + " | sen: " + sen);
+//
+//        angle = 270;
+//        sen = Math.sin(Math.toRadians(angle));
+//        sen = (double) Math.round(sen * 100) / 100;
+//        System.out.println("angle: " + angle + " | sen: " + sen);
+//
+//        angle = 360;
+//        sen = Math.sin(Math.toRadians(angle));
+//        sen = (double) Math.round(sen * 100) / 100;
+//        System.out.println("angle: " + angle + " | sen: " + sen);
+
         System.out.println("""
 
                          ┌████┐ ┌██┐   ┌█████┐ ┌████┐ ┌█████┐┌█████┐

@@ -27,15 +27,13 @@ public class Product implements Cloneable, Comparable<Product> {
     }
 
     private void calculateMass() {
-        this.mass = 0D;
+        mass = 0D;
         for (int i = 0; i < parameters.size(); i++) {
-            double PI = 3.14;
-
             double x = quantities.get(i);
-            double y = 1 / 2 * Math.sin(PI * x - PI / 2) + 1 / 2;
-
-            this.mass += y * parameters.get(i).getInfluence();
+            double y = 1D / 2 * Math.sin(Math.PI * x - Math.PI / 2) + 1D / 2;
+            mass += y * parameters.get(i).getInfluence();
         }
+        mass = (double) Math.round(mass * 1000) / 1000;
     }
 
     public void fitness(double valuePerKilogram) {
@@ -95,7 +93,24 @@ public class Product implements Cloneable, Comparable<Product> {
 
     @Override
     public String toString() {
-        return "id: " + this.getId() + "\tMass: " + new DecimalFormat("#,##0.00 kg").format(this.getMass()) + "\tValue: " + new DecimalFormat("R$ #,##0.00").format(this.getValue()) + "\tCost: " + new DecimalFormat("R$ #,##0.00").format(this.getCost()) + "\tProfit: " + new DecimalFormat("R$ #,##0.00").format(this.getProfit());
+        String sProfit = "";
+        for(int i = 0; i < profit * 10; i ++){
+            sProfit = sProfit.concat("█");
+        }
+
+        String sMass = "";
+        for(int i = 0; i < mass * 100; i ++){
+            sMass = sMass.concat("═");;
+        }
+
+        return "id: " + this.getId()
+                + "\tMass: " + new DecimalFormat("#,##0.00 kg").format(this.getMass())
+                + "\tValue: " + new DecimalFormat("R$ #,##0.00").format(this.getValue())
+                + "\tCost: " + new DecimalFormat("R$ #,##0.00").format(this.getCost())
+                + "\tProfit: " + new DecimalFormat("R$ #,##0.00").format(this.getProfit())
+                + "\tQtd normal: " + this.getQuantities()
+                + "\nProf: " + sProfit
+                + "\nMass: " + sMass;
     }
 
     @Override
