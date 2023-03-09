@@ -31,8 +31,17 @@ public class Antibody extends Product {
         for (int i = 0; i < getLightChain().size(); i++) {
             double randomValue = (double) Math.round(Math.random() * 100) / 100;
 
-            if (randomValue <= mutationRate) {
+            if (randomValue >= mutationRate) {
+                randomValue = (double) Math.round(Math.random() * 100) / 100;
                 lightChain.add(randomValue);
+
+//                if (randomValue > 0.5) {
+//                    double newValue = getLightChain().get(i) + randomValue * mutationRate;
+//                    lightChain.add(newValue <= 1 ? newValue : getLightChain().get(i));
+//                } else {
+//                    double newValue = getLightChain().get(i) - randomValue * mutationRate;
+//                    lightChain.add(newValue >= 0 ? newValue : getLightChain().get(i));
+//                }
             } else {
                 lightChain.add(getLightChain().get(i));
             }
