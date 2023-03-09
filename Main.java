@@ -18,49 +18,6 @@ public class Main {
     static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
-//        double angle;
-//        double sen;
-//
-//        angle = 0;
-//        sen = Math.sin(Math.toRadians(angle));
-//        sen = (double) Math.round(sen * 100) / 100;
-//        System.out.println("angle: " + angle + " | sen: " + sen);
-//
-//        angle = 15;
-//        sen = Math.sin(Math.toRadians(angle));
-//        sen = (double) Math.round(sen * 100) / 100;
-//        System.out.println("angle: " + angle + " | sen: " + sen);
-//
-//        angle = 30;
-//        sen = Math.sin(Math.toRadians(angle));
-//        sen = (double) Math.round(sen * 100) / 100;
-//        System.out.println("angle: " + angle + " | sen: " + sen);
-//
-//        angle = 45;
-//        sen = Math.sin(Math.toRadians(angle));
-//        sen = (double) Math.round(sen * 100) / 100;
-//        System.out.println("angle: " + angle + " | sen: " + sen);
-//
-//        angle = 90;
-//        sen = Math.sin(Math.toRadians(angle));
-//        sen = (double) Math.round(sen * 100) / 100;
-//        System.out.println("angle: " + angle + " | sen: " + sen);
-//
-//        angle = 180;
-//        sen = Math.sin(Math.toRadians(angle));
-//        sen = (double) Math.round(sen * 100) / 100;
-//        System.out.println("angle: " + angle + " | sen: " + sen);
-//
-//        angle = 270;
-//        sen = Math.sin(Math.toRadians(angle));
-//        sen = (double) Math.round(sen * 100) / 100;
-//        System.out.println("angle: " + angle + " | sen: " + sen);
-//
-//        angle = 360;
-//        sen = Math.sin(Math.toRadians(angle));
-//        sen = (double) Math.round(sen * 100) / 100;
-//        System.out.println("angle: " + angle + " | sen: " + sen);
-
         System.out.println("""
 
                          ┌████┐ ┌██┐   ┌█████┐ ┌████┐ ┌█████┐┌█████┐
@@ -76,9 +33,10 @@ public class Main {
                 ╔═══╝ ║ ║ ╚╗║ ║ ║ ║ ║ ║║ ╚═╝ ║ ║ ╚╗║ ╚═╝ ║ ║ ╚╗ ║ ╚═╝ ║║ ║
                 ╚═════╝ ╚══╝╚═╝ ╚═╝ ╚═╝╚═════╝ ╚══╝╚═════╝ ╚══╝ ╚═════╝╚═╝""");
 
-        parameters.add(new Parameter("K", 0.0, 100.0, 2.0, 0.5));
-        parameters.add(new Parameter("N", 0.0, 100.0, 2.0, 0.3));
-        parameters.add(new Parameter("P", 0.0, 100.0, 2.0, 0.2));
+        parameters.add(new Parameter("N", 0.0, 100.0, 3.52, 0.6));
+        parameters.add(new Parameter("P", 0.0, 100.0, 3.15, 0.3));
+        parameters.add(new Parameter("K", 0.0, 100.0, 6.65, 0.1));
+
 
         int option;
         do {
