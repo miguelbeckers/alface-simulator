@@ -21,7 +21,8 @@ public class Product implements Cloneable, Comparable<Product> {
     private void calculateCost() {
         double cost = 0;
         for (int i = 0; i < parameters.size(); i++) {
-            cost = parameters.get(i).getCost() * quantities.get(i);
+            double realQuantity = (double) Math.round(parameters.get(i).getRealQuantity(quantities.get(i)) * 10) / 10;
+            cost = parameters.get(i).getCost() * realQuantity;
         }
         this.cost = cost;
     }
@@ -76,15 +77,17 @@ public class Product implements Cloneable, Comparable<Product> {
         this.quantities = quantities;
     }
 
-    public String getValues() {
-        StringBuilder values = new StringBuilder("values: ");
+    public String getQuantitiesResume() {
+        StringBuilder realQuantities = new StringBuilder("realQuantities: ");
+
         for (int i = 0; i < quantities.size(); i++) {
-            values.append(parameters.get(i).getName()).append(" - ").append(Math.round(parameters.get(i).getValue(quantities.get(i)) * 10) / 10);
+            double realQuantity = (double) Math.round(parameters.get(i).getRealQuantity(quantities.get(i)) * 10) / 10;
+            realQuantities.append(parameters.get(i).getName()).append(" - ").append(realQuantity);
             if (i + 1 != quantities.size()) {
-                values.append(", ");
+                realQuantities.append(", ");
             }
         }
-        return values.toString();
+        return realQuantities.toString();
     }
 
     public void setId(Long id) {
@@ -108,7 +111,7 @@ public class Product implements Cloneable, Comparable<Product> {
                 + "\tValue: " + new DecimalFormat("R$ #,##0.00").format(this.getValue())
                 + "\tCost: " + new DecimalFormat("R$ #,##0.00").format(this.getCost())
                 + "\tProfit: " + new DecimalFormat("R$ #,##0.00").format(this.getProfit())
-                + "\tQtd normal: " + this.getQuantities()
+                + "\tQuantity: " + this.getQuantities()
                 + "\nProf: " + sProfit
                 + "\nMass: " + sMass;
     }

@@ -6,9 +6,6 @@ import algorithms.Immunological.Immunological;
 import model.Parameter;
 import model.Product;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,9 +30,9 @@ public class Main {
                 ╔═══╝ ║ ║ ╚╗║ ║ ║ ║ ║ ║║ ╚═╝ ║ ║ ╚╗║ ╚═╝ ║ ║ ╚╗ ║ ╚═╝ ║║ ║
                 ╚═════╝ ╚══╝╚═╝ ╚═╝ ╚═╝╚═════╝ ╚══╝╚═════╝ ╚══╝ ╚═════╝╚═╝""");
 
-        parameters.add(new Parameter("N", 0.0, 100.0, 3.52, 0.6));
-        parameters.add(new Parameter("P", 0.0, 100.0, 3.15, 0.3));
-        parameters.add(new Parameter("K", 0.0, 100.0, 6.65, 0.1));
+        parameters.add(new Parameter("N", 20.0, 80.0, 3.52, 0.6));
+        parameters.add(new Parameter("P", 30.0, 90.0, 3.15, 0.3));
+        parameters.add(new Parameter("K", 50.0, 120.0, 6.65, 0.1));
 
 
         int option;
@@ -95,11 +92,11 @@ public class Main {
         System.out.print("Inform the parameter name: ");
         String name = in.nextLine();
 
-        System.out.print("Inform the minimum value: ");
-        double minValue = in.nextDouble();
+        System.out.print("Inform the minimum quantity: ");
+        double minQuantity = in.nextDouble();
 
-        System.out.print("Inform the maximum value: ");
-        double maxValue = in.nextDouble();
+        System.out.print("Inform the maximum quantity: ");
+        double maxQuantity = in.nextDouble();
 
         System.out.print("Inform the parameter cost: ");
         double cost = in.nextDouble();
@@ -107,7 +104,7 @@ public class Main {
         System.out.print("Inform the parameter influence: ");
         double influence = in.nextDouble();
 
-        parameters.add(new Parameter(name, minValue, maxValue, cost, influence));
+        parameters.add(new Parameter(name, minQuantity, maxQuantity, cost, influence));
         System.out.println("\nThe parameter has been added");
     }
 
@@ -139,8 +136,8 @@ public class Main {
         double influence = in.nextDouble();
 
         parameters.get(index).setName(name);
-        parameters.get(index).setMinValue(minValue);
-        parameters.get(index).setMaxValue(maxValue);
+        parameters.get(index).setMinQuantity(minValue);
+        parameters.get(index).setMaxQuantity(maxValue);
         parameters.get(index).setCost(cost);
         parameters.get(index).setInfluence(influence);
 
@@ -198,7 +195,7 @@ public class Main {
 
         System.out.println("\nThe solution is:");
         System.out.println(result);
-        System.out.println(result.getValues());
+        System.out.println(result.getQuantitiesResume());
     }
 
     public static void geneticMenu() {
@@ -221,7 +218,7 @@ public class Main {
 
         System.out.println("\nThe solution is:");
         System.out.println(result);
-        System.out.println(result.getValues());
+        System.out.println(result.getQuantitiesResume());
     }
 
     public static void immunologicalMenu() {
@@ -250,7 +247,7 @@ public class Main {
 
         System.out.println("\nThe solution is:");
         System.out.println(result);
-        System.out.println(result.getValues());
+        System.out.println(result.getQuantitiesResume());
     }
 
     public static void antColonyMenu() {

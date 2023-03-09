@@ -3,22 +3,22 @@ package model;
 public class Parameter {
     private String name;
     private Double cost;
-    private Double minValue;
-    private Double maxValue;
+    private Double minQuantity;
+    private Double maxQuantity;
     private Double influence;
 
-    public Parameter(String name, Double minValue, Double maxValue, Double cost, Double influence) {
+    public Parameter(String name, Double minQuantity, Double maxQuantity, Double cost, Double influence) {
         this.name = name;
-        this.minValue = minValue;
-        this.maxValue = maxValue;
+        this.minQuantity = minQuantity;
+        this.maxQuantity = maxQuantity;
         this.cost = cost;
         this.influence = influence;
     }
 
-    public Double getValue(Double normalValue) {
-        if (normalValue < 0 || normalValue > 1)
-            throw new RuntimeException("Error: Expected a value between 0 and 1, received: " + normalValue);
-        return (maxValue - minValue) * normalValue + minValue;
+    public Double getRealQuantity(Double normalQuantity) {
+        if (normalQuantity < 0 || normalQuantity > 1)
+            throw new RuntimeException("Error: Expected a value between 0 and 1, received: " + normalQuantity);
+        return (maxQuantity - minQuantity) * normalQuantity + minQuantity;
     }
 
     public Double getInfluence() {
@@ -41,31 +41,31 @@ public class Parameter {
         this.influence = influence;
     }
 
-    public void setMinValue(Double minValue) {
-        this.minValue = minValue;
+    public void setMinQuantity(Double minQuantity) {
+        this.minQuantity = minQuantity;
     }
 
-    public void setMaxValue(Double maxValue) {
-        this.maxValue = maxValue;
+    public void setMaxQuantity(Double maxQuantity) {
+        this.maxQuantity = maxQuantity;
     }
 
     public String getName() {
         return name;
     }
 
-    public Double getMinValue() {
-        return minValue;
+    public Double getMinQuantity() {
+        return minQuantity;
     }
 
-    public Double getMaxValue() {
-        return maxValue;
+    public Double getMaxQuantity() {
+        return maxQuantity;
     }
 
     @Override
     public String toString() {
         return "name: " + name +
-                ", minValue: " + minValue +
-                ", maxValue: " + maxValue +
+                ", minQuantity: " + minQuantity +
+                ", maxQuantity: " + maxQuantity +
                 ", cost: " + cost +
                 ", influence: " + influence;
     }

@@ -6,27 +6,27 @@ import java.util.List;
 public class Tree {
   private Node root;
   private int levelNumber;
-  private double childNumber;
+  private double descendantNumber;
 
-  public Tree(int levelNumber, double childNumber) {
+  public Tree(int levelNumber, double descendantNumber) {
     this.root = new Node(-1);
     this.levelNumber = levelNumber;
-    this.childNumber = childNumber;
+    this.descendantNumber = descendantNumber;
 
     build();
   }
 
   private void build() {
-    createChilds(root, 1);
+    createDescendants(root, 1);
   }
 
-  private void createChilds(Node root, int level) {
-    for (double i = 0; i <= 1; i += childNumber) {
-      Node node = new Node(i);
+  private void createDescendants(Node root, int level) {
+    for (double i = 0; i <= 1; i += descendantNumber) {
+      Node node = new Node((double) Math.round(i * 100) / 100);
       root.getChilds().add(node);
 
       if (level < levelNumber) {
-        createChilds(node, level + 1);
+        createDescendants(node, level + 1);
       }
     }
   }
