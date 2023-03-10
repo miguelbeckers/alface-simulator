@@ -1,15 +1,20 @@
 package algorithms.Backtracking;
 
-import model.Product;
-import model.Parameter;
+import general.Product;
+import general.Parameter;
+import general.Setting;
+
+import javax.swing.*;
 import java.util.List;
 import java.util.ArrayList;
 
 public class BackTracking {
-  private List<Parameter> parameters = new ArrayList<>();
+  private List<Setting> settings;
+  private List<Parameter> parameters;
   private Product bestSolution;
 
-  public BackTracking(List<Parameter> parameters) {
+  public BackTracking(List<Setting> settings, List<Parameter> parameters) {
+    this.settings = settings;
     this.parameters = parameters;
     initializeBestSolution();
   }
@@ -21,7 +26,7 @@ public class BackTracking {
       quantities.add((double) 0);
     }
 
-    bestSolution = new Product(parameters, quantities);
+    bestSolution = new Product(settings, parameters, quantities);
   }
 
   public Product solve(double valuePerUnit, double step) {
@@ -32,11 +37,14 @@ public class BackTracking {
 
     for (int i = 0; i < allCombos.size(); i++) {
       List<Double> chromosome = new ArrayList<>(allCombos.get(i));
-      Product product = new Product(parameters, chromosome);
+      Product product = new Product(settings, parameters, chromosome);
 
       product.fitness(valuePerUnit);
       product.setId((long) i);
-      System.out.println(product);
+
+      if(settings.get(9).getValue()) {
+        System.out.println(product);
+      }
 
       if (bestSolution.compareTo(product) > 0) {
         bestSolution = product;

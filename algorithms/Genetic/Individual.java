@@ -1,14 +1,15 @@
 package algorithms.Genetic;
 
-import model.Parameter;
-import model.Product;
+import general.Parameter;
+import general.Product;
+import general.Setting;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Individual extends Product {
-    public Individual(List<Parameter> parameters, List<Double> chromosome) {
-        super(parameters, chromosome);
+    public Individual(List<Setting> settings, List<Parameter> parameters, List<Double> chromosome) {
+        super(settings, parameters, chromosome);
     }
 
     public List<Individual> crossover(Individual individual) {
@@ -22,10 +23,10 @@ public class Individual extends Product {
         chromosome2.addAll(quantities.subList(0, cut));
         chromosome2.addAll(individual.getChromosome().subList(cut, quantities.size()));
 
-        Individual son1 = new Individual(parameters, chromosome1);
+        Individual son1 = new Individual(settings, parameters, chromosome1);
         son1.setId(id + 1);
 
-        Individual son2 = new Individual(parameters, chromosome2);
+        Individual son2 = new Individual(settings, parameters, chromosome2);
         son2.setId(id + 1);
 
         List<Individual> sons = new ArrayList<>();

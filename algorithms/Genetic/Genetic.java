@@ -4,16 +4,20 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import model.Parameter;
+import general.Parameter;
+import general.Setting;
 
 public class Genetic {
+  private List<Setting> settings;
   private List<Individual> population = new ArrayList<>();
   private Individual bestSolution;
 
-  public Genetic(int populationSize, List<Parameter> parameters) {
+  public Genetic(List<Setting> settings, List<Parameter> parameters, int populationSize) {
+    this.settings = settings;
+
     for (int i = 0; i < populationSize; i++) {
       List<Double> chromosome = getRandomChromosome(parameters);
-      population.add(new Individual(parameters, chromosome));
+      population.add(new Individual(settings, parameters, chromosome));
     }
     bestSolution = population.get(0);
   }
@@ -50,6 +54,12 @@ public class Genetic {
     sortPopulation();
     bestSolution = population.get(0);
 
+    if(settings.get(8).getValue()){
+      for (Individual individual : population) {
+        System.out.println(individual);
+      }
+    }
+
     for (int i = 0; i < generations; i++) {
       double sumOfProfits = 0.0;
 
@@ -82,7 +92,16 @@ public class Genetic {
       }
 
       sortPopulation();
-      System.out.println(population.get(0).toString());
+
+      if(settings.get(8).getValue()){
+        for (Individual individual : population) {
+          System.out.println(individual);
+        }
+      }
+
+      if(settings.get(9).getValue()){
+        System.out.println(population.get(0));
+      }
 
       if (bestSolution.compareTo(population.get(0)) > 0) {
         bestSolution = population.get(0);

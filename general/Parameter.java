@@ -1,4 +1,4 @@
-package model;
+package general;
 
 public class Parameter {
     private String name;

@@ -1,19 +1,23 @@
-package model;
+package general;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class Product implements Cloneable, Comparable<Product> {
     protected Long id = 0L;
+    protected List<Setting> settings;
     protected List<Parameter> parameters;
+    protected List<Double> quantities;
     protected Double cost;
     protected Double value;
     protected Double profit;
     protected Double mass;
-    protected List<Double> quantities;
 
-    public Product(List<Parameter> parameters, List<Double> quantities) {
+
+    public Product(List<Setting> settings, List<Parameter> parameters, List<Double> quantities) {
+        this.settings = settings;
         this.parameters = parameters;
         this.quantities = quantities;
     }
@@ -127,14 +131,20 @@ public class Product implements Cloneable, Comparable<Product> {
 
     @Override
     public String toString() {
+        String formattedMass = new DecimalFormat("#,##0.00 kg").format(this.getMass());
+        String formattedValue = new DecimalFormat("R$ #,##0.00").format(this.getValue());
+        String formattedCost = new DecimalFormat("R$ #,##0.00").format(this.getCost());
+        String formattedProfit = new DecimalFormat("R$ #,##0.00").format(this.getProfit());
+
         return "id: " + this.getId()
-                + "\tMass: " + new DecimalFormat("#,##0.00 kg").format(this.getMass())
-                + "\tValue: " + new DecimalFormat("R$ #,##0.00").format(this.getValue())
-                + "\tCost: " + new DecimalFormat("R$ #,##0.00").format(this.getCost())
-                + "\tProfit: " + new DecimalFormat("R$ #,##0.00").format(this.getProfit())
-                + "\tNormal: " + this.getNormalQuantities()
-                + "\nProf: " + getProfitBar()
-                + "\nMass: " + getMassBar();
+                + (settings.get(0).getValue() ? "\tMass: " + formattedMass : "")
+                + (settings.get(1).getValue() ? "\tValue: " + formattedValue : "")
+                + (settings.get(2).getValue() ? "\tCost: " + formattedCost : "")
+                + (settings.get(3).getValue() ? "\tProfit: " + formattedProfit : "")
+                + (settings.get(4).getValue() ? "\tNormal: " + getNormalQuantities() : "")
+                + (settings.get(5).getValue() ? "\tReal: " + getRealQuantities() : "")
+                + (settings.get(6).getValue() ? "\nProf: " + getProfitBar() : "")
+                + (settings.get(7).getValue() ? "\nMass: " + getMassBar() : "");
     }
 
     @Override

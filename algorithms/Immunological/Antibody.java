@@ -1,14 +1,15 @@
 package algorithms.Immunological;
 
-import model.Parameter;
-import model.Product;
+import general.Parameter;
+import general.Product;
+import general.Setting;
 
 import java.util.List;
 import java.util.ArrayList;
 
 public class Antibody extends Product {
-    public Antibody(List<Parameter> parameters, List<Double> lightChain) {
-        super(parameters, lightChain);
+    public Antibody(List<Setting> settings, List<Parameter> parameters, List<Double> lightChain) {
+        super(settings, parameters, lightChain);
     }
 
     public Double getAffinity() {
@@ -35,13 +36,6 @@ public class Antibody extends Product {
                 randomValue = (double) Math.round(Math.random() * 100) / 100;
                 lightChain.add(randomValue);
 
-//                if (randomValue > 0.5) {
-//                    double newValue = getLightChain().get(i) + randomValue * mutationRate;
-//                    lightChain.add(newValue <= 1 ? newValue : getLightChain().get(i));
-//                } else {
-//                    double newValue = getLightChain().get(i) - randomValue * mutationRate;
-//                    lightChain.add(newValue >= 0 ? newValue : getLightChain().get(i));
-//                }
             } else {
                 lightChain.add(getLightChain().get(i));
             }
