@@ -122,7 +122,7 @@ public class Main {
                     for(int i = 0; i < iterations; i++){
                         BackTracking backTrack = new BackTracking(settings, parameters);
                         Product result = backTrack.solve(marketValue, step);
-                        System.out.println("Iteration: " + i + "Result: ");
+                        System.out.println("Iteration: " + i + " Result: ");
                         System.out.println(result);
                     }
                     return;
@@ -177,7 +177,7 @@ public class Main {
                     for(int i = 0; i < iterations; i++){
                         Genetic genetic = new Genetic(settings, parameters, populationSize);
                         Individual result = genetic.solve(marketValue, mutationRate, generationNumber);
-                        System.out.println("Iteration: " + i + "Result: ");
+                        System.out.println("Iteration: " + i + " Result: ");
                         System.out.println(result);
                     }
                     return;
@@ -244,7 +244,7 @@ public class Main {
                     for(int i = 0; i < iterations; i++){
                         Immunological immunological = new Immunological(settings, parameters, populationSize);
                         Antibody result = immunological.solve(marketValue, generationNumber, bestsQuantity, hyperFactor, objective);
-                        System.out.println("Iteration: " + i + "Result: ");
+                        System.out.println("Iteration: " + i + " Result: ");
                         System.out.println(result);
                     }
                     return;
