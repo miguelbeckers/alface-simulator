@@ -30,9 +30,9 @@ public class Main {
                 ╔═══╝ ║ ║ ╚╗║ ║ ║ ║ ║ ║║ ╚═╝ ║ ║ ╚╗║ ╚═╝ ║ ║ ╚╗ ║ ╚═╝ ║║ ║
                 ╚═════╝ ╚══╝╚═╝ ╚═╝ ╚═╝╚═════╝ ╚══╝╚═════╝ ╚══╝ ╚═════╝╚═╝""");
 
-        parameters.add(new Parameter("N", 20.0, 80.0, 3.52, 0.6));
-        parameters.add(new Parameter("P", 30.0, 90.0, 3.15, 0.3));
-        parameters.add(new Parameter("K", 50.0, 120.0, 6.65, 0.1));
+        parameters.add(new Parameter("N", 0.2, 0.8, 3.52, 0.6));
+        parameters.add(new Parameter("P", 0.3, 0.9, 3.15, 0.3));
+        parameters.add(new Parameter("K", 0.5, 1.2, 6.65, 0.1));
 
 
         int option;
@@ -123,10 +123,10 @@ public class Main {
         System.out.print("Inform the parameter name: ");
         String name = in.nextLine();
 
-        System.out.print("Inform the minimum value: ");
+        System.out.print("Inform the minimum quantity: ");
         double minValue = in.nextDouble();
 
-        System.out.print("Inform the maximum value: ");
+        System.out.print("Inform the maximum quantity: ");
         double maxValue = in.nextDouble();
 
         System.out.print("Inform the parameter cost: ");
@@ -195,30 +195,30 @@ public class Main {
 
         System.out.println("\nThe solution is:");
         System.out.println(result);
-        System.out.println(result.getQuantitiesResume());
+        System.out.println("Real: " + result.getRealQuantities());
     }
 
     public static void geneticMenu() {
         System.out.println("\nGenetic algorithm:\n");
 
-        System.out.print("Inform the population size (e.g. 20): ");
-        int populationSize = in.nextInt();
-
         System.out.print("Inform the the individual value (e.g. 14.00): ");
         double productValue = in.nextDouble();
 
-        System.out.print("Inform the the mutation rate (e.g. 0.1): ");
-        double mutationRate = in.nextDouble();
+        System.out.print("Inform the population size (e.g. 20): ");
+        int populationSize = in.nextInt();
 
         System.out.print("Inform the the generation number (e.g. 100): ");
         int generationNumber = in.nextInt();
+
+        System.out.print("Inform the the mutation rate (e.g. 0.1): ");
+        double mutationRate = in.nextDouble();
 
         Genetic genetic = new Genetic(populationSize, parameters);
         Individual result = genetic.solve(productValue, mutationRate, generationNumber);
 
         System.out.println("\nThe solution is:");
         System.out.println(result);
-        System.out.println(result.getQuantitiesResume());
+        System.out.println("Real: " + result.getRealQuantities());
     }
 
     public static void immunologicalMenu() {
@@ -247,7 +247,7 @@ public class Main {
 
         System.out.println("\nThe solution is:");
         System.out.println(result);
-        System.out.println(result.getQuantitiesResume());
+        System.out.println("Real: " + result.getRealQuantities());
     }
 
     public static void antColonyMenu() {

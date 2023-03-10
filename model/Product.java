@@ -77,17 +77,48 @@ public class Product implements Cloneable, Comparable<Product> {
         this.quantities = quantities;
     }
 
-    public String getQuantitiesResume() {
-        StringBuilder realQuantities = new StringBuilder("realQuantities: ");
+    public String getNormalQuantities() {
+        StringBuilder realQuantities = new StringBuilder("[ ");
 
         for (int i = 0; i < quantities.size(); i++) {
-            double realQuantity = (double) Math.round(parameters.get(i).getRealQuantity(quantities.get(i)) * 10) / 10;
-            realQuantities.append(parameters.get(i).getName()).append(" - ").append(realQuantity);
+            realQuantities.append(parameters.get(i).getName()).append(": ").append(quantities.get(i));
             if (i + 1 != quantities.size()) {
                 realQuantities.append(", ");
             }
         }
+        realQuantities.append(" ]");
         return realQuantities.toString();
+    }
+
+    public String getRealQuantities() {
+        StringBuilder realQuantities = new StringBuilder("[ ");
+
+        for (int i = 0; i < quantities.size(); i++) {
+            double realQuantity = (double) Math.round(parameters.get(i).getRealQuantity(quantities.get(i)) * 10) / 10;
+            realQuantities.append(parameters.get(i).getName()).append(": ").append(realQuantity);
+            if (i + 1 != quantities.size()) {
+                realQuantities.append(", ");
+            }
+        }
+        realQuantities.append(" ]");
+        return realQuantities.toString();
+    }
+
+    public String getProfitBar() {
+        StringBuilder profitBar = new StringBuilder();
+        for (int i = 0; i < profit * 10; i++) {
+            profitBar.append("█");
+        }
+        return profitBar.toString();
+    }
+
+    public String getMassBar() {
+        StringBuilder massBar = new StringBuilder();
+        for (int i = 0; i < mass * 100; i++) {
+            massBar.append("═");
+            ;
+        }
+        return massBar.toString();
     }
 
     public void setId(Long id) {
@@ -96,24 +127,14 @@ public class Product implements Cloneable, Comparable<Product> {
 
     @Override
     public String toString() {
-        String sProfit = "";
-        for(int i = 0; i < profit * 10; i ++){
-            sProfit = sProfit.concat("█");
-        }
-
-        String sMass = "";
-        for(int i = 0; i < mass * 100; i ++){
-            sMass = sMass.concat("═");;
-        }
-
         return "id: " + this.getId()
                 + "\tMass: " + new DecimalFormat("#,##0.00 kg").format(this.getMass())
                 + "\tValue: " + new DecimalFormat("R$ #,##0.00").format(this.getValue())
                 + "\tCost: " + new DecimalFormat("R$ #,##0.00").format(this.getCost())
                 + "\tProfit: " + new DecimalFormat("R$ #,##0.00").format(this.getProfit())
-                + "\tQuantity: " + this.getQuantities()
-                + "\nProf: " + sProfit
-                + "\nMass: " + sMass;
+                + "\tNormal: " + this.getNormalQuantities()
+                + "\nProf: " + getProfitBar()
+                + "\nMass: " + getMassBar();
     }
 
     @Override
