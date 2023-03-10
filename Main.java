@@ -46,7 +46,6 @@ public class Main {
         settings.add(new Setting(7L, "printMassBar", true));
         settings.add(new Setting(8L, "printEachIteration", false));
         settings.add(new Setting(9L, "printTheBestOfGeneration", true));
-        settings.add(new Setting(10L, "printTheAlgorithmResult", true));
 
         int option;
         do {
@@ -90,75 +89,168 @@ public class Main {
     }
 
     public static void backTrackingMenu() {
-        System.out.println("\nBackTracking algorithm:\n");
+        double step = 0.25;
+        double marketValue = 14;
+        int iterations = 1;
 
-        System.out.print("Inform the step (e.g. 0.25): ");
-        double step = in.nextDouble();
+        int option;
+        do {
+            System.out.println("\nBackTracking algorithm:\n");
+            System.out.println("0 <- back");
+            System.out.println("1 -> step: " + step);
+            System.out.println("2 -> marketValue: " + marketValue);
+            System.out.println("3 -> iterations: " + iterations);
+            System.out.println("4 -> start");
+            System.out.print("\nselect: ");
 
-        System.out.print("Inform the market value (e.g. 14.00): ");
-        double productValue = in.nextDouble();
+            option = in.nextInt();
 
-        BackTracking backTrack = new BackTracking(settings, parameters);
-        Product result = backTrack.solve(productValue, step);
-
-        if(settings.get(10).getValue()){
-            System.out.println("\nResult:");
-            System.out.println(result);
-        }
+            switch (option) {
+                case 1 -> {
+                    System.out.print("\nInform the step (e.g. 0.25): ");
+                    step = in.nextDouble();
+                }
+                case 2 -> {
+                    System.out.print("\nInform the market value (e.g. 14.00): ");
+                    marketValue = in.nextDouble();
+                }
+                case 3 -> {
+                    System.out.print("\nInform the number of iterations (e.g. 1): ");
+                    iterations = in.nextInt();
+                }
+                case 4 -> {
+                    for(int i = 0; i < iterations; i++){
+                        BackTracking backTrack = new BackTracking(settings, parameters);
+                        Product result = backTrack.solve(marketValue, step);
+                        System.out.println("Iteration: " + i + "Result: ");
+                        System.out.println(result);
+                    }
+                    return;
+                }
+            }
+        } while (option != 0);
     }
 
     public static void geneticMenu() {
-        System.out.println("\nGenetic algorithm:\n");
+        double marketValue = 14;
+        int populationSize = 20;
+        int generationNumber = 100;
+        double mutationRate = 0.1;
+        int iterations = 1;
 
-        System.out.print("Inform the market value (e.g. 14.00): ");
-        double productValue = in.nextDouble();
+        int option;
+        do {
+            System.out.println("\nGenetic algorithm:\n");
+            System.out.println("0 <- back");
+            System.out.println("1 -> marketValue: " + marketValue);
+            System.out.println("2 -> populationSize: " + populationSize);
+            System.out.println("3 -> generationNumber: " + generationNumber);
+            System.out.println("4 -> mutationRate: " + mutationRate);
+            System.out.println("5 -> iterations: " + iterations);
+            System.out.println("6 -> start");
+            System.out.print("\nselect: ");
 
-        System.out.print("Inform the population size (e.g. 20): ");
-        int populationSize = in.nextInt();
+            option = in.nextInt();
 
-        System.out.print("Inform the the generation number (e.g. 100): ");
-        int generationNumber = in.nextInt();
-
-        System.out.print("Inform the the mutation rate (e.g. 0.1): ");
-        double mutationRate = in.nextDouble();
-
-        Genetic genetic = new Genetic(settings, parameters, populationSize);
-        Individual result = genetic.solve(productValue, mutationRate, generationNumber);
-
-        if(settings.get(10).getValue()){
-            System.out.println("\nResult:");
-            System.out.println(result);
-        }
+            switch (option) {
+                case 1 -> {
+                    System.out.print("\nInform the market value (e.g. 14.00): ");
+                    marketValue = in.nextDouble();
+                }
+                case 2 -> {
+                    System.out.print("\nInform the population size (e.g. 20): ");
+                    populationSize = in.nextInt();
+                }
+                case 3 -> {
+                    System.out.print("\nInform the the generation number (e.g. 100): ");
+                    generationNumber = in.nextInt();
+                }
+                case 4 -> {
+                    System.out.print("\nInform the the mutation rate (e.g. 0.1): ");
+                    mutationRate = in.nextDouble();
+                }
+                case 5 -> {
+                    System.out.print("\nInform the number of iterations (e.g. 1): ");
+                    iterations = in.nextInt();
+                }
+                case 6 -> {
+                    for(int i = 0; i < iterations; i++){
+                        Genetic genetic = new Genetic(settings, parameters, populationSize);
+                        Individual result = genetic.solve(marketValue, mutationRate, generationNumber);
+                        System.out.println("Iteration: " + i + "Result: ");
+                        System.out.println(result);
+                    }
+                    return;
+                }
+            }
+        } while (option != 0);
     }
 
     public static void immunologicalMenu() {
-        System.out.println("\nImmunological algorithm:\n");
+        double marketValue = 14;
+        int populationSize = 20;
+        int generationNumber = 100;
+        double hyperFactor = 0.1;
+        int bestsQuantity = 3;
+        double objective = 15;
+        int iterations = 1;
 
-        System.out.print("Inform the market value (e.g. 14.00): ");
-        double productValue = in.nextDouble();
+        int option;
+        do {
+            System.out.println("\nImmunological algorithm:\n");
+            System.out.println("0 <- back");
+            System.out.println("1 -> marketValue: " + marketValue);
+            System.out.println("2 -> populationSize: " + populationSize);
+            System.out.println("3 -> generationNumber: " + generationNumber);
+            System.out.println("4 -> hyperFactor: " + hyperFactor);
+            System.out.println("5 -> bestsQuantity: " + bestsQuantity);
+            System.out.println("6 -> objective: " + objective);
+            System.out.println("7 -> iterations: " + iterations);
+            System.out.println("8 -> start");
+            System.out.print("\nselect: ");
 
-        System.out.print("Inform the population size (e.g. 20): ");
-        int populationSize = in.nextInt();
+            option = in.nextInt();
 
-        System.out.print("Inform the generation number (e.g. 100): ");
-        int generations = in.nextInt();
-
-        System.out.print("Inform the hypermutation factor (e.g. 0.1): ");
-        double hyperFactor = in.nextDouble();
-
-        System.out.print("Inform the number of best antibodies to clone (e.g. 3): ");
-        int bestsQuantity = in.nextInt();
-
-        System.out.print("Inform the objective value (e.g. 15): ");
-        double objective = in.nextDouble();
-
-        Immunological immunological = new Immunological(settings, parameters, populationSize);
-        Antibody result = immunological.solve(productValue, generations, bestsQuantity, hyperFactor, objective);
-
-        if(settings.get(10).getValue()){
-            System.out.println("\nResult:");
-            System.out.println(result);
-        }
+            switch (option) {
+                case 1 -> {
+                    System.out.print("\nInform the market value (e.g. 14.00): ");
+                    marketValue = in.nextDouble();
+                }
+                case 2 -> {
+                    System.out.print("\nInform the population size (e.g. 20): ");
+                    populationSize = in.nextInt();
+                }
+                case 3 -> {
+                    System.out.print("\nInform the generation number (e.g. 100): ");
+                    generationNumber = in.nextInt();
+                }
+                case 4 -> {
+                    System.out.print("\nInform the hypermutation factor (e.g. 0.1): ");
+                    hyperFactor = in.nextDouble();
+                }
+                case 5 -> {
+                    System.out.print("\nInform the number of best antibodies to clone (e.g. 3): ");
+                    bestsQuantity = in.nextInt();
+                }
+                case 6 -> {
+                    System.out.print("\nInform the objective value (e.g. 15): ");
+                    objective = in.nextDouble();
+                }
+                case 7 -> {
+                    System.out.print("\nInform the number of iterations (e.g. 1): ");
+                    iterations = in.nextInt();
+                }
+                case 8 -> {
+                    for(int i = 0; i < iterations; i++){
+                        Immunological immunological = new Immunological(settings, parameters, populationSize);
+                        Antibody result = immunological.solve(marketValue, generationNumber, bestsQuantity, hyperFactor, objective);
+                        System.out.println("Iteration: " + i + "Result: ");
+                        System.out.println(result);
+                    }
+                    return;
+                }
+            }
+        } while (option != 0);
     }
 
     public static void antColonyMenu() {
