@@ -3,7 +3,7 @@ package general;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Scanner;
 
 public class Product implements Cloneable, Comparable<Product> {
     protected Long id = 0L;
@@ -14,7 +14,7 @@ public class Product implements Cloneable, Comparable<Product> {
     protected Double value;
     protected Double profit;
     protected Double mass;
-
+    protected Scanner in = new Scanner(System.in);
 
     public Product(List<Setting> settings, List<Parameter> parameters, List<Double> quantities) {
         this.settings = settings;
@@ -41,9 +41,19 @@ public class Product implements Cloneable, Comparable<Product> {
         mass = (double) Math.round(mass * 1000) / 1000;
     }
 
+    private void readMass(){
+        System.out.print("Inform the mass: ");
+        mass = in.nextDouble();
+    }
+
     public void fitness(double valuePerKilogram) {
         calculateCost();
-        calculateMass();
+
+        if (settings.get(10).getValue()) {
+            calculateMass();
+        } else {
+            readMass();
+        }
 
         this.value = mass * valuePerKilogram;
         this.profit = value - cost > 0 ? value - cost : 0.01;

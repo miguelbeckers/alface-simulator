@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Main {
     public static List<Parameter> parameters = new ArrayList<>();
     public static List<Setting> settings = new ArrayList<>();
-    static Scanner in = new Scanner(System.in);
+    public static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
         System.out.println("""
@@ -46,6 +46,7 @@ public class Main {
         settings.add(new Setting(7L, "printMassBar", true));
         settings.add(new Setting(8L, "printEachIteration", false));
         settings.add(new Setting(9L, "printTheBestOfGeneration", true));
+        settings.add(new Setting(10L, "autoFitness", true));
 
         int option;
         do {

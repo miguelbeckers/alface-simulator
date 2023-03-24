@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class Immunological {
-    private List<Setting> settings;
-    private List<Parameter> parameters;
+    private final List<Setting> settings;
+    private final List<Parameter> parameters;
     private List<Antibody> population = new ArrayList<>();
     private Antibody bestSolution;
 
