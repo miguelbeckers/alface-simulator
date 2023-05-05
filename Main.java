@@ -55,6 +55,7 @@ public class Main {
             System.out.println("1 -> solver");
             System.out.println("2 -> parameters");
             System.out.println("3 -> settings");
+            System.out.println("4 -> dataset");
             System.out.print("\nselect: ");
 
             option = in.nextInt();
@@ -63,6 +64,7 @@ public class Main {
                 case 1 -> showSolverMenu();
                 case 2 -> showParametersMenu();
                 case 3 -> showSettingsMenu();
+                case 4 -> datasetMenu();
             }
         } while (option != 0);
     }
@@ -380,6 +382,29 @@ public class Main {
             if (option != 0) {
                 settings.get(option - 1).setValue(!settings.get(option - 1).getValue());
             }
+        } while (option != 0);
+    }
+
+    public static void datasetMenu(){
+        int option;
+        do {
+            System.out.println("\nSettings menu:\n");
+            System.out.println("0 <- back");
+            System.out.println("1 <- insert values");
+            System.out.println("2 <- ");
+
+            System.out.print("\nselect: ");
+
+            option = in.nextInt();
+
+//            P1      P2      P3
+//            0,60    0,75    0,50
+//            0,10    0,76    0,37
+//            0,21    0,36    0,72
+//            0,64    0,95    0,76
+//            0,61    0,92    0,85
+//            0,78    0,39    0,69
+
         } while (option != 0);
     }
 }
