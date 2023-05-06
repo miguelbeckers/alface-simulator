@@ -91,7 +91,7 @@ public class Product implements Cloneable, Comparable<Product> {
         this.quantities = quantities;
     }
 
-    public String getNormalQuantities() {
+    public String getNormalQuantitiesAsString() {
         StringBuilder realQuantities = new StringBuilder("[ ");
 
         for (int i = 0; i < quantities.size(); i++) {
@@ -104,7 +104,7 @@ public class Product implements Cloneable, Comparable<Product> {
         return realQuantities.toString();
     }
 
-    public String getRealQuantities() {
+    public String getRealQuantitiesAsString() {
         StringBuilder realQuantities = new StringBuilder("[ ");
 
         for (int i = 0; i < quantities.size(); i++) {
@@ -151,8 +151,8 @@ public class Product implements Cloneable, Comparable<Product> {
                 + (settings.get(1).getValue() ? "\tValue: " + formattedValue : "")
                 + (settings.get(2).getValue() ? "\tCost: " + formattedCost : "")
                 + (settings.get(3).getValue() ? "\tProfit: " + formattedProfit : "")
-                + (settings.get(4).getValue() ? "\tNormal: " + getNormalQuantities() : "")
-                + (settings.get(5).getValue() ? "\tReal: " + getRealQuantities() : "")
+                + (settings.get(4).getValue() ? "\tNormal: " + getNormalQuantitiesAsString() : "")
+                + (settings.get(5).getValue() ? "\tReal: " + getRealQuantitiesAsString() : "")
                 + (settings.get(6).getValue() ? "\nProf: " + getProfitBar() : "")
                 + (settings.get(7).getValue() ? "\nMass: " + getMassBar() : "");
     }
