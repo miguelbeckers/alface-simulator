@@ -56,7 +56,6 @@ public class Main {
             System.out.println("1 -> solver");
             System.out.println("2 -> parameters");
             System.out.println("3 -> settings");
-            System.out.println("4 -> dataset");
             System.out.print("\nselect: ");
 
             option = in.nextInt();
@@ -65,7 +64,6 @@ public class Main {
                 case 1 -> showSolverMenu();
                 case 2 -> showParametersMenu();
                 case 3 -> showSettingsMenu();
-                case 4 -> datasetMenu();
             }
         } while (option != 0);
     }
@@ -384,61 +382,5 @@ public class Main {
                 settings.get(option - 1).setValue(!settings.get(option - 1).getValue());
             }
         } while (option != 0);
-    }
-
-    public static void datasetMenu() {
-
-        List<Product> products = new ArrayList<>();
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.60, 0.75, 0.50))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.10, 0.76, 0.37))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.21, 0.36, 0.72))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.64, 0.95, 0.76))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.61, 0.92, 0.85))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.78, 0.39, 0.69))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.60, 0.75, 0.50))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.79, 0.74, 0.22))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.38, 0.56, 0.92))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.61, 0.79, 0.84))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.63, 0.34, 0.51))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.49, 0.45, 0.21))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.60, 0.75, 0.50))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.98, 0.39, 0.71))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.77, 0.45, 0.54))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.06, 0.20, 0.04))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.67, 0.16, 0.60))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.94, 0.44, 0.19))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.60, 0.75, 0.50))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.11, 0.30, 0.40))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.37, 0.36, 0.62))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.81, 0.05, 0.82))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.56, 0.54, 0.82))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.04, 0.58, 0.23))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.60, 0.75, 0.50))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.60, 0.50, 0.65))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.93, 0.97, 0.09))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.16, 0.46, 0.59))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.85, 0.38, 0.03))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.31, 0.76, 0.15))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.60, 0.75, 0.50))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.43, 0.55, 0.32))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.42, 0.70, 0.86))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.76, 0.89, 0.67))));
-        products.add(new Product(settings, parameters, new ArrayList<>(Arrays.asList(0.81, 0.60, 0.40))));
-
-        List<Double> results = new ArrayList<>();
-        for (Product product : products) {
-            double mass = 0;
-            for (int i = 0; i < product.getQuantities().size(); i++) {
-                double x = product.getQuantities().get(i);
-                double y = 1D / 2 * Math.sin(Math.PI * x - Math.PI / 2) + 1D / 2;
-                mass += (y * product.getParameters().get(i).getInfluence());
-            }
-            mass = ((double) Math.round(mass * 1000))/ 1000;
-            results.add(mass);
-        }
-
-        for (int i = 0; i < results.size(); i++) {
-            System.out.println(results.get(i));
-        }
     }
 }
