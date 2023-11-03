@@ -1,20 +1,19 @@
 package algorithms.Backtracking;
 
-import general.Product;
+import general.Lettuce;
 import general.Parameter;
-import general.Setting;
+import general.Config;
 
-import javax.swing.*;
 import java.util.List;
 import java.util.ArrayList;
 
 public class BackTracking {
-  private List<Setting> settings;
+  private List<Config> configs;
   private List<Parameter> parameters;
-  private Product bestSolution;
+  private Lettuce bestSolution;
 
-  public BackTracking(List<Setting> settings, List<Parameter> parameters) {
-    this.settings = settings;
+  public BackTracking(List<Config> configs, List<Parameter> parameters) {
+    this.configs = configs;
     this.parameters = parameters;
     initializeBestSolution();
   }
@@ -26,10 +25,10 @@ public class BackTracking {
       quantities.add((double) 0);
     }
 
-    bestSolution = new Product(settings, parameters, quantities);
+    bestSolution = new Lettuce(configs, parameters, quantities);
   }
 
-  public Product solve(double valuePerUnit, double step) {
+  public Lettuce solve(double valuePerUnit, double step) {
     bestSolution.fitness(valuePerUnit);
 
     Tree tree = new Tree(parameters.size(), step);
@@ -37,17 +36,17 @@ public class BackTracking {
 
     for (int i = 0; i < allCombos.size(); i++) {
       List<Double> chromosome = new ArrayList<>(allCombos.get(i));
-      Product product = new Product(settings, parameters, chromosome);
+      Lettuce lettuce = new Lettuce(configs, parameters, chromosome);
 
-      product.fitness(valuePerUnit);
-      product.setId((long) i);
+      lettuce.fitness(valuePerUnit);
+      lettuce.setId((long) i);
 
-      if(settings.get(9).getValue()) {
-        System.out.println(product);
+      if(configs.get(9).getValue()) {
+        System.out.println(lettuce);
       }
 
-      if (bestSolution.compareTo(product) > 0) {
-        bestSolution = product;
+      if (bestSolution.compareTo(lettuce) > 0) {
+        bestSolution = lettuce;
       }
     }
 

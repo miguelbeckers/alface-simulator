@@ -1,20 +1,19 @@
 import algorithms.Backtracking.BackTracking;
-import algorithms.Genetic.Genetic;
-import algorithms.Genetic.Individual;
-import algorithms.Immunological.Antibody;
-import algorithms.Immunological.Immunological;
+import algorithms.GeneticAlgorithm.Genetic;
+import algorithms.GeneticAlgorithm.Individual;
+import algorithms.ImmunologicalSystem.Antibody;
+import algorithms.ImmunologicalSystem.Immunological;
 import general.Parameter;
-import general.Product;
-import general.Setting;
+import general.Lettuce;
+import general.Config;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static List<Parameter> parameters = new ArrayList<>();
-    public static List<Setting> settings = new ArrayList<>();
+    public static List<Config> configs = new ArrayList<>();
     public static Scanner in = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -37,17 +36,17 @@ public class Main {
         parameters.add(new Parameter("P", 0.3, 0.9, 3.15, 0.3));
         parameters.add(new Parameter("K", 0.5, 1.2, 6.65, 0.1));
 
-        settings.add(new Setting(0L, "printMass", true));
-        settings.add(new Setting(1L, "printValue", true));
-        settings.add(new Setting(2L, "printCost", true));
-        settings.add(new Setting(3L, "printProfit", true));
-        settings.add(new Setting(4L, "printNormalQuantities", true));
-        settings.add(new Setting(5L, "printRealQuantities", false));
-        settings.add(new Setting(6L, "printProfitBar", true));
-        settings.add(new Setting(7L, "printMassBar", true));
-        settings.add(new Setting(8L, "printEachIteration", false));
-        settings.add(new Setting(9L, "printTheBestOfGeneration", true));
-        settings.add(new Setting(10L, "autoFitness", true));
+        configs.add(new Config(0L, "printMass", true));
+        configs.add(new Config(1L, "printValue", true));
+        configs.add(new Config(2L, "printCost", true));
+        configs.add(new Config(3L, "printProfit", true));
+        configs.add(new Config(4L, "printNormalQuantities", true));
+        configs.add(new Config(5L, "printRealQuantities", false));
+        configs.add(new Config(6L, "printProfitBar", true));
+        configs.add(new Config(7L, "printMassBar", true));
+        configs.add(new Config(8L, "printEachIteration", false));
+        configs.add(new Config(9L, "printTheBestOfGeneration", true));
+        configs.add(new Config(10L, "autoFitness", true));
 
         int option;
         do {
@@ -122,8 +121,8 @@ public class Main {
                 }
                 case 4 -> {
                     for (int i = 0; i < iterations; i++) {
-                        BackTracking backTrack = new BackTracking(settings, parameters);
-                        Product result = backTrack.solve(marketValue, step);
+                        BackTracking backTrack = new BackTracking(configs, parameters);
+                        Lettuce result = backTrack.solve(marketValue, step);
                         System.out.println("Iteration: " + i + " Result: ");
                         System.out.println(result);
                     }
@@ -177,7 +176,7 @@ public class Main {
                 }
                 case 6 -> {
                     for (int i = 0; i < iterations; i++) {
-                        Genetic genetic = new Genetic(settings, parameters, populationSize);
+                        Genetic genetic = new Genetic(configs, parameters, populationSize);
                         Individual result = genetic.solve(marketValue, mutationRate, generationNumber);
                         System.out.println("Iteration: " + i + " Result: ");
                         System.out.println(result);
@@ -244,7 +243,7 @@ public class Main {
                 }
                 case 8 -> {
                     for (int i = 0; i < iterations; i++) {
-                        Immunological immunological = new Immunological(settings, parameters, populationSize);
+                        Immunological immunological = new Immunological(configs, parameters, populationSize);
                         Antibody result = immunological.solve(marketValue, generationNumber, bestsQuantity, hyperFactor, objective);
                         System.out.println("Iteration: " + i + " Result: ");
                         System.out.println(result);
@@ -372,14 +371,14 @@ public class Main {
         do {
             System.out.println("\nSettings menu:\n");
             System.out.println("0 <- back");
-            for (int i = 0; i < settings.size(); i++) {
-                System.out.println((i + 1) + " -> " + settings.get(i));
+            for (int i = 0; i < configs.size(); i++) {
+                System.out.println((i + 1) + " -> " + configs.get(i));
             }
             System.out.print("\nselect: ");
 
             option = in.nextInt();
             if (option != 0) {
-                settings.get(option - 1).setValue(!settings.get(option - 1).getValue());
+                configs.get(option - 1).setValue(!configs.get(option - 1).getValue());
             }
         } while (option != 0);
     }

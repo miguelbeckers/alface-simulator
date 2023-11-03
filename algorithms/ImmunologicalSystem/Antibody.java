@@ -1,15 +1,15 @@
-package algorithms.Immunological;
+package algorithms.ImmunologicalSystem;
 
 import general.Parameter;
-import general.Product;
-import general.Setting;
+import general.Lettuce;
+import general.Config;
 
 import java.util.List;
 import java.util.ArrayList;
 
-public class Antibody extends Product {
-    public Antibody(List<Setting> settings, List<Parameter> parameters, List<Double> lightChain) {
-        super(settings, parameters, lightChain);
+public class Antibody extends Lettuce {
+    public Antibody(List<Config> configs, List<Parameter> parameters, List<Double> lightChain) {
+        super(configs, parameters, lightChain);
     }
 
     public Double getAffinity() {

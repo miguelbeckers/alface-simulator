@@ -1,12 +1,12 @@
 package general;
 
-public class Setting {
+public class Config {
     private Long id;
     private String name;
     private Boolean value;
 
 
-    public Setting(Long id, String name, Boolean value){
+    public Config(Long id, String name, Boolean value){
         this.id = id;
         this.name = name;
         this.value = value;

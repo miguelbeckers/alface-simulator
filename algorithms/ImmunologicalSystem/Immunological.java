@@ -1,26 +1,25 @@
-package algorithms.Immunological;
+package algorithms.ImmunologicalSystem;
 
-import algorithms.Genetic.Individual;
 import general.Parameter;
-import general.Setting;
+import general.Config;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Immunological {
-    private final List<Setting> settings;
+    private final List<Config> configs;
     private final List<Parameter> parameters;
     private List<Antibody> population = new ArrayList<>();
     private Antibody bestSolution;
 
-    public Immunological(List<Setting> settings, List<Parameter> parameters, int populationSize) {
-        this.settings = settings;
+    public Immunological(List<Config> configs, List<Parameter> parameters, int populationSize) {
+        this.configs = configs;
         this.parameters = parameters;
 
         for (int i = 0; i < populationSize; i++) {
             List<Double> lightChain = getRandomLightChain(parameters);
-            population.add(new Antibody(settings, parameters, lightChain));
+            population.add(new Antibody(configs, parameters, lightChain));
         }
         bestSolution = population.get(0);
     }
@@ -44,7 +43,7 @@ public class Immunological {
 
         sortPopulation();
 
-        if(settings.get(8).getValue()){
+        if(configs.get(8).getValue()){
             for (Antibody antibody : population) {
                 System.out.println(antibody);
             }
@@ -66,7 +65,7 @@ public class Immunological {
 
             for (int j = 0; j < numberOfNewAntibodies; j++) {
                 List<Double> lightChain = getRandomLightChain(parameters);
-                clones.add(new Antibody(settings, parameters, lightChain));
+                clones.add(new Antibody(configs, parameters, lightChain));
             }
 
             for (Antibody antibody : clones) {
@@ -80,13 +79,13 @@ public class Immunological {
             population = clones;
             sortPopulation();
 
-            if(settings.get(8).getValue()){
+            if(configs.get(8).getValue()){
                 for (Antibody antibody : population) {
                     System.out.println(antibody);
                 }
             }
 
-            if(settings.get(9).getValue()){
+            if(configs.get(9).getValue()){
                 System.out.println(population.get(0));
             }
 

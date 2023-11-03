@@ -1,24 +1,23 @@
-package algorithms.Genetic;
+package algorithms.GeneticAlgorithm;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import general.Parameter;
-import general.Setting;
+import general.Config;
 import java.lang.System;
-import java.util.Scanner;
 
 public class Genetic {
-    private final List<Setting> settings;
+    private final List<Config> configs;
     private List<Individual> population = new ArrayList<>();
     private Individual bestSolution;
 
-    public Genetic(List<Setting> settings, List<Parameter> parameters, int populationSize) {
-        this.settings = settings;
+    public Genetic(List<Config> configs, List<Parameter> parameters, int populationSize) {
+        this.configs = configs;
 
         for (int i = 0; i < populationSize; i++) {
             List<Double> chromosome = getRandomChromosome(parameters);
-            population.add(new Individual(settings, parameters, chromosome));
+            population.add(new Individual(configs, parameters, chromosome));
         }
         bestSolution = population.get(0);
     }
@@ -55,7 +54,7 @@ public class Genetic {
         sortPopulation();
         bestSolution = population.get(0);
 
-        if (settings.get(8).getValue()) {
+        if (configs.get(8).getValue()) {
             for (Individual individual : population) {
                 System.out.println(individual);
             }
@@ -94,13 +93,13 @@ public class Genetic {
 
             sortPopulation();
 
-            if (settings.get(8).getValue()) {
+            if (configs.get(8).getValue()) {
                 for (Individual individual : population) {
                     System.out.println(individual);
                 }
             }
 
-            if (settings.get(9).getValue()) {
+            if (configs.get(9).getValue()) {
                 System.out.println(population.get(0));
             }
 
