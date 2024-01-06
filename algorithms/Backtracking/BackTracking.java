@@ -29,7 +29,8 @@ public class BackTracking {
   }
 
   public Lettuce solve(double valuePerUnit, double step) {
-    bestSolution.fitness(valuePerUnit);
+//    bestSolution.fitness(valuePerUnit);
+    bestSolution.fitnessModel(valuePerUnit);
 
     Tree tree = new Tree(parameters.size(), step);
     List<List<Double>> allCombos = tree.getAllCombos();
@@ -38,7 +39,8 @@ public class BackTracking {
       List<Double> chromosome = new ArrayList<>(allCombos.get(i));
       Lettuce lettuce = new Lettuce(configs, parameters, chromosome);
 
-      lettuce.fitness(valuePerUnit);
+//      lettuce.fitness(valuePerUnit);
+      lettuce.fitnessModel(valuePerUnit);
       lettuce.setId((long) i);
 
       if(configs.get(9).getValue()) {

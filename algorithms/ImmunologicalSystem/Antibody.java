@@ -42,6 +42,7 @@ public class Antibody extends Lettuce {
         }
 
         setLightChain(lightChain);
-        fitness(value);
+//        fitness(value);
+        fitnessModel(value);
     }
 }

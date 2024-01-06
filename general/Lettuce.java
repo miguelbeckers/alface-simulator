@@ -61,6 +61,90 @@ public class Lettuce implements Cloneable, Comparable<Lettuce> {
         this.profit = value - cost > 0 ? value - cost : 0.01;
     }
 
+    public void fitnessModel(double valuePerKilogram) {
+        calculateCost();
+
+        Model model = new Model();
+
+        List<Double> massLane1 = new ArrayList<>();
+        for(Data data : Dataset.LANE1){
+            double intensity = data.getIntensity();
+            double lane = data.getLane();
+            double position = data.getPosition();
+            double irr_off = quantities.get(0);
+            double ce = quantities.get(1);
+            double ph = quantities.get(2);
+            massLane1.add(model.calculate(intensity, lane, position, irr_off, ce, ph));
+        }
+
+        List<Double> massLane2 = new ArrayList<>();
+        for(Data data : Dataset.LANE2){
+            double intensity = data.getIntensity();
+            double lane = data.getLane();
+            double position = data.getPosition();
+            double irr_off = quantities.get(0);
+            double ce = quantities.get(1);
+            double ph = quantities.get(2);
+            massLane2.add(model.calculate(intensity, lane, position, irr_off, ce, ph));
+        }
+
+        List<Double> massLane3 = new ArrayList<>();
+        for(Data data : Dataset.LANE3){
+            double intensity = data.getIntensity();
+            double lane = data.getLane();
+            double position = data.getPosition();
+            double irr_off = quantities.get(0);
+            double ce = quantities.get(1);
+            double ph = quantities.get(2);
+            massLane3.add(model.calculate(intensity, lane, position, irr_off, ce, ph));
+        }
+
+        List<Double> massLane4 = new ArrayList<>();
+        for(Data data : Dataset.LANE4){
+            double intensity = data.getIntensity();
+            double lane = data.getLane();
+            double position = data.getPosition();
+            double irr_off = quantities.get(0);
+            double ce = quantities.get(1);
+            double ph = quantities.get(2);
+            massLane4.add(model.calculate(intensity, lane, position, irr_off, ce, ph));
+        }
+
+        List<Double> massLane5 = new ArrayList<>();
+        for(Data data : Dataset.LANE5){
+            double intensity = data.getIntensity();
+            double lane = data.getLane();
+            double position = data.getPosition();
+            double irr_off = quantities.get(0);
+            double ce = quantities.get(1);
+            double ph = quantities.get(2);
+            massLane5.add(model.calculate(intensity, lane, position, irr_off, ce, ph));
+        }
+
+        List<Double> massLane6 = new ArrayList<>();
+        for(Data data : Dataset.LANE6){
+            double intensity = data.getIntensity();
+            double lane = data.getLane();
+            double position = data.getPosition();
+            double irr_off = quantities.get(0);
+            double ce = quantities.get(1);
+            double ph = quantities.get(2);
+            massLane6.add(model.calculate(intensity, lane, position, irr_off, ce, ph));
+        }
+
+        double avgMassLane1 = massLane1.stream().reduce(0.0, Double::sum) / massLane1.size();
+        double avgMassLane2 = massLane2.stream().reduce(0.0, Double::sum) / massLane2.size();
+        double avgMassLane3 = massLane3.stream().reduce(0.0, Double::sum) / massLane3.size();
+        double avgMassLane4 = massLane4.stream().reduce(0.0, Double::sum) / massLane4.size();
+        double avgMassLane5 = massLane5.stream().reduce(0.0, Double::sum) / massLane5.size();
+        double avgMassLane6 = massLane6.stream().reduce(0.0, Double::sum) / massLane6.size();
+
+        this.mass = (avgMassLane1 + avgMassLane2 + avgMassLane3 + avgMassLane4 + avgMassLane5 + avgMassLane6) / 6;
+
+        this.value = mass * valuePerKilogram;
+        this.profit = mass;
+    }
+
     public Long getId() {
         return id;
     }
@@ -130,7 +214,7 @@ public class Lettuce implements Cloneable, Comparable<Lettuce> {
 
     public String getMassBar() {
         StringBuilder massBar = new StringBuilder();
-        for (int i = 0; i < mass * 100; i++) {
+        for (int i = 0; i < mass; i++) {
             massBar.append("═");
             ;
         }
@@ -143,20 +227,24 @@ public class Lettuce implements Cloneable, Comparable<Lettuce> {
 
     @Override
     public String toString() {
-        String formattedMass = new DecimalFormat("#,##0.00 kg").format(this.getMass());
-        String formattedValue = new DecimalFormat("R$ #,##0.00").format(this.getValue());
-        String formattedCost = new DecimalFormat("R$ #,##0.00").format(this.getCost());
-        String formattedProfit = new DecimalFormat("R$ #,##0.00").format(this.getProfit());
+        try {
+            String formattedMass = new DecimalFormat("#,##0.00 kg").format(this.getMass());
+            String formattedValue = new DecimalFormat("R$ #,##0.00").format(this.getValue());
+            String formattedCost = new DecimalFormat("R$ #,##0.00").format(this.getCost());
+            String formattedProfit = new DecimalFormat("R$ #,##0.00").format(this.getProfit());
 
-        return "id: " + this.getId()
-                + (configs.get(0).getValue() ? "\tMass: " + formattedMass : "")
-                + (configs.get(1).getValue() ? "\tValue: " + formattedValue : "")
-                + (configs.get(2).getValue() ? "\tCost: " + formattedCost : "")
-                + (configs.get(3).getValue() ? "\tProfit: " + formattedProfit : "")
-                + (configs.get(4).getValue() ? "\tNormal: " + getNormalQuantitiesAsString() : "")
-                + (configs.get(5).getValue() ? "\tReal: " + getRealQuantitiesAsString() : "")
-                + (configs.get(6).getValue() ? "\nProf: " + getProfitBar() : "")
-                + (configs.get(7).getValue() ? "\nMass: " + getMassBar() : "");
+            return "id: " + this.getId()
+                    + (configs.get(0).getValue() ? "\tMass: " + formattedMass : "")
+                    + (configs.get(1).getValue() ? "\tValue: " + formattedValue : "")
+                    + (configs.get(2).getValue() ? "\tCost: " + formattedCost : "")
+                    + (configs.get(3).getValue() ? "\tProfit: " + formattedProfit : "")
+                    + (configs.get(4).getValue() ? "\tNormal: " + getNormalQuantitiesAsString() : "")
+                    + (configs.get(5).getValue() ? "\tReal: " + getRealQuantitiesAsString() : "")
+                    + (configs.get(6).getValue() ? "\nProf: " + getProfitBar() : "")
+                    + (configs.get(7).getValue() ? "\nMass: " + getMassBar() : "");
+        } catch (Exception e) {
+            return "formatting error";
+        }
     }
 
     @Override

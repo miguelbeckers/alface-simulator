@@ -91,7 +91,7 @@ public class Main {
 
     public static void backTrackingMenu() {
         double step = 0.25;
-        double marketValue = 14;
+        double marketValue = 0.14;
         int iterations = 1;
 
         int option;
@@ -133,7 +133,7 @@ public class Main {
     }
 
     public static void geneticMenu() {
-        double marketValue = 14;
+        double marketValue = 0.14;
         int populationSize = 20;
         int generationNumber = 100;
         double mutationRate = 0.1;
@@ -188,7 +188,7 @@ public class Main {
     }
 
     public static void immunologicalMenu() {
-        double marketValue = 14;
+        double marketValue = 0.14;
         int populationSize = 20;
         int generationNumber = 100;
         double hyperFactor = 0.1;

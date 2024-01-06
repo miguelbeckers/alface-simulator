@@ -48,7 +48,8 @@ public class Genetic {
 
     public Individual solve(double value, double mutationRate, int generations) {
         for (Individual individual : population) {
-            individual.fitness(value);
+//            individual.fitness(value);
+            individual.fitnessModel(value);
         }
 
         sortPopulation();
@@ -88,7 +89,8 @@ public class Genetic {
             setPopulation(newPopulation);
 
             for (Individual individual : population) {
-                individual.fitness(value);
+//                individual.fitness(value);
+                individual.fitnessModel(value);
             }
 
             sortPopulation();
